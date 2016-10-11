@@ -1,2 +1,2 @@
-# taxi
+# Taxi
 Project covering basic functionality of taxi service for both drivers and clients.
