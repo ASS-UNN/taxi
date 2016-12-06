@@ -119,9 +119,12 @@ namespace TaxiDesktopClient
                 if (DesktopClient.IsTaken())
                 {
                     Phase = 2;
+                    DesktopClient.SetOrderDriverInfo();
                     labelProcessing.Text = "Ваш заказ принят";
                     labelDriverName.Text = "Имя водителя: " + DesktopClient.GetDriverName();
                     labelDriverPhone.Text = "Связь с водителем: " + DesktopClient.GetDriverPhone();
+                    labelDriverName.Visible = true;
+                    labelDriverPhone.Visible = true;
                     buttonDriverPos.Visible = true;
                 }
             }
@@ -152,6 +155,8 @@ namespace TaxiDesktopClient
             buttonMapFrom.Enabled = true;
             buttonMapTo.Enabled = true;
             buttonDriverPos.Visible = false;
+            labelDriverName.Visible = false;
+            labelDriverPhone.Visible = false;
         }
 
         private void buttonDriverPos_Click(object sender, EventArgs e)
