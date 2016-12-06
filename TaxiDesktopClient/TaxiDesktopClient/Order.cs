@@ -22,7 +22,7 @@ namespace TaxiDesktopClient
         public string DriverName { get; set; }
         public string DriverPhone { get; set; }
         public string OperatorPhone { get; set; }
-        public Coord DriverPosition {get; set;}
+        public Tuple<float,float> DriverPosition {get; set;}
 
         public Order(string customerName = "", string customerPhone = "", string orderStartAddress="", string orderStartGeographicalLatitude = "", string orderStartGeographicalLongitude = "",
             string orderFinishAddress="", string orderFinishGeographicalLatitude = "", string orderFinishGeographicalLongitude = "", List<string> orderExtraProperty = null)

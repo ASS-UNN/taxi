@@ -88,7 +88,7 @@ namespace TaxiDesktopClient
             this.clientOrder.OrderStatus = -1;
         }
 
-        public Coord GetDriverPossition()
+        public Tuple<float,float> GetDriverPossition()
         {
             this.clientOrder.DriverPosition = clientService.ServiceProxy.GetDriverPosition(this.clientOrder.OrderID);
             return (this.clientOrder.DriverPosition);

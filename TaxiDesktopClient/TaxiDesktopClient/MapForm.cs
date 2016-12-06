@@ -51,11 +51,11 @@ namespace TaxiDesktopClient
             
         }
 
-        public void DrawPos(Coord Pos)
+        public void DrawPos(Tuple<float,float> Pos)
         {
             Im = (Bitmap)Init.Clone();
-            int x = (int)Pos.x;
-            int y = (int)Pos.y;
+            int x = (int)Pos.Item1;
+            int y = (int)Pos.Item2;
             int Size=20;
             for (int i=(int)Math.Max(0,x-Prop*Size);i<Math.Min(Im.Width, x+Prop*Size); i++)
             {

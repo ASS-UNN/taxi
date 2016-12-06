@@ -13,13 +13,7 @@ namespace TaxiDesktopClient
         int GetOrderStatus(int OrderID);
         string GetDriverPhone(int OrderID);
         string GetDriverName(int OrderID);
-        Coord GetDriverPosition(int OrderID);
+        Tuple<float,float> GetDriverPosition(int OrderID);
         void AbortOrder(int OrderID);
     }
-
-    public struct Coord
-    {
-        public float x;
-        public float y;
-    };
 }
