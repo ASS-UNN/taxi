@@ -61,7 +61,7 @@ namespace TaxiDesktopClient
             this.clientOrder.DriverName = clientService.ServiceProxy.GetDriverName(this.clientOrder.OrderID);
             this.clientOrder.DriverPhone = clientService.ServiceProxy.GetDriverPhone(this.clientOrder.OrderID);
         }
-        public float GetPrice()
+        public decimal GetPrice()
         {
             return this.clientOrder.costOfOrder;
         }

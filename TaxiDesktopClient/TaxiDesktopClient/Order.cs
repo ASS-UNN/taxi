@@ -18,7 +18,7 @@ namespace TaxiDesktopClient
         public string orderFinishGeographicalLatitude { get; set; }
         public string orderFinishGeographicalLongitude { get; set; }
         public List<string> orderExtraProperty { get; set; }
-        public float costOfOrder { get; set; }
+        public decimal costOfOrder { get; set; }
         public string DriverName { get; set; }
         public string DriverPhone { get; set; }
         public string OperatorPhone { get; set; }

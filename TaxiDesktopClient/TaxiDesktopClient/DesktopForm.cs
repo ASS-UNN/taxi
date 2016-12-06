@@ -147,7 +147,7 @@ namespace TaxiDesktopClient
             ToAddressBox.Enabled = true;
             ExtracheckedListBox.Enabled = true;
             labelOperatorPhone.Visible = false;
-            Phase = 1;
+            Phase = 0;
             buttonAbort.Visible = false;
             buttonMapFrom.Enabled = true;
             buttonMapTo.Enabled = true;
