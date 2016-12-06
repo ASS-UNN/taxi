@@ -7,11 +7,7 @@ namespace TaxiDesktopClient
     [ScsService]
     public interface ITaxiService
     {
-        string ShowTest(int N);
-        int CreateOrder(string Name, string Phone, string From, string To, List<string> Extra);
-        int CreateOrder(string Name, string Phone, float FromX, float FromY, string To, List<string> Extra);
-        int CreateOrder(string Name, string Phone, string From, float ToX, float ToY, List<string> Extra);
-        int CreateOrder(string Name, string Phone, float FromX, float FromY, float ToX, float ToY, List<string> Extra);
+        int CreateOrder(string Name, string Phone, string StartAddress, string StartGeographicalLatitude, string StartGeographicalLongitude, string FinishAddress, string FinishGeographicalLatitude, string FinishGeographicalLongitude, List<string> Extra);
         float GetPrice(int OrderID);
         string GetOperatorPhone();
         int GetOrderStatus(int OrderID);
