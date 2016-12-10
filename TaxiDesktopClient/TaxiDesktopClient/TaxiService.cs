@@ -8,7 +8,7 @@ namespace TaxiDesktopClient
     public interface ITaxiService
     {
         int CreateOrder(string Name, string Phone, string StartAddress, string StartGeographicalLatitude, string StartGeographicalLongitude, string FinishAddress, string FinishGeographicalLatitude, string FinishGeographicalLongitude, List<string> Extra);
-        decimal GetPrice(int OrderID);
+        decimal GetPrice(string StartAddress, string StartGeographicalLatitude, string StartGeographicalLongitude, string FinishAddress, string FinishGeographicalLatitude, string FinishGeographicalLongitude);
         string GetOperatorPhone();
         int GetOrderStatus(int OrderID);
         string GetDriverPhone(int OrderID);

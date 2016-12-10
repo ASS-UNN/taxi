@@ -163,6 +163,7 @@
             this.FromAddressBox.Size = new System.Drawing.Size(100, 20);
             this.FromAddressBox.TabIndex = 10;
             this.FromAddressBox.Visible = false;
+            this.FromAddressBox.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
             // 
             // FromAddressLabel
             // 
@@ -191,6 +192,7 @@
             this.textBoxFromX.Size = new System.Drawing.Size(54, 20);
             this.textBoxFromX.TabIndex = 13;
             this.textBoxFromX.Visible = false;
+            this.textBoxFromX.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
             // 
             // labelFromY
             // 
@@ -209,6 +211,7 @@
             this.textBoxFromY.Size = new System.Drawing.Size(54, 20);
             this.textBoxFromY.TabIndex = 15;
             this.textBoxFromY.Visible = false;
+            this.textBoxFromY.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
             // 
             // textBoxToY
             // 
@@ -217,6 +220,7 @@
             this.textBoxToY.Size = new System.Drawing.Size(54, 20);
             this.textBoxToY.TabIndex = 19;
             this.textBoxToY.Visible = false;
+            this.textBoxToY.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
             // 
             // labelToY
             // 
@@ -235,6 +239,7 @@
             this.textBoxToX.Size = new System.Drawing.Size(54, 20);
             this.textBoxToX.TabIndex = 17;
             this.textBoxToX.Visible = false;
+            this.textBoxToX.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
             // 
             // labelToX
             // 
@@ -263,6 +268,7 @@
             this.ToAddressBox.Size = new System.Drawing.Size(100, 20);
             this.ToAddressBox.TabIndex = 20;
             this.ToAddressBox.Visible = false;
+            this.ToAddressBox.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
             // 
             // ExtracheckedListBox
             // 
@@ -302,12 +308,11 @@
             // labelPrice
             // 
             this.labelPrice.AutoSize = true;
-            this.labelPrice.Location = new System.Drawing.Point(12, 364);
+            this.labelPrice.Location = new System.Drawing.Point(126, 347);
             this.labelPrice.Name = "labelPrice";
             this.labelPrice.Size = new System.Drawing.Size(36, 13);
             this.labelPrice.TabIndex = 25;
             this.labelPrice.Text = "Цена:";
-            this.labelPrice.Visible = false;
             // 
             // labelProcessing
             // 
@@ -323,7 +328,7 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 10;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // labelDriverName

@@ -41,7 +41,7 @@ namespace TaxiDesktopClient
                 this.clientOrder = new Order(customerName, customerPhone, orderStartAddress, orderStartGeographicalLatitude, orderStartGeographicalLongitude, orderFinishAddress, orderFinishGeographicalLatitude, orderFinishGeographicalLongitude, orderExtraProperty);
                 this.clientOrder.OrderID = ID;
                 this.clientOrder.OperatorPhone = clientService.ServiceProxy.GetOperatorPhone();
-                this.clientOrder.costOfOrder = clientService.ServiceProxy.GetPrice(this.clientOrder.OrderID);
+                this.clientOrder.costOfOrder = clientService.ServiceProxy.GetPrice(orderStartAddress, orderStartGeographicalLatitude, orderStartGeographicalLongitude, orderFinishAddress, orderFinishGeographicalLatitude, orderFinishGeographicalLongitude);
                 return true;
             }
             return false;
@@ -61,9 +61,9 @@ namespace TaxiDesktopClient
             this.clientOrder.DriverName = clientService.ServiceProxy.GetDriverName(this.clientOrder.OrderID);
             this.clientOrder.DriverPhone = clientService.ServiceProxy.GetDriverPhone(this.clientOrder.OrderID);
         }
-        public decimal GetPrice()
+        public decimal GetPrice(string orderStartAddress = "", string orderStartGeographicalLatitude = "", string orderStartGeographicalLongitude = "", string orderFinishAddress = "", string orderFinishGeographicalLatitude = "", string orderFinishGeographicalLongitude = "")
         {
-            return this.clientOrder.costOfOrder;
+            return clientService.ServiceProxy.GetPrice(orderStartAddress, orderStartGeographicalLatitude, orderStartGeographicalLongitude, orderFinishAddress, orderFinishGeographicalLatitude, orderFinishGeographicalLongitude);
         }
 
         public string GetDriverName()

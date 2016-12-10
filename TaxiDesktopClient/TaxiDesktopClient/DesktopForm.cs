@@ -18,9 +18,10 @@ namespace TaxiDesktopClient
         List<string> Extra = new List<string>();
         int Phase = 0;
         //int Port = 10083;
-        //string IP = "127.0.0.1";
+        string IP = "127.0.0.1";
         int Port = 4040;        
-        string IP = "95.79.210.235";
+        //string IP = "95.79.210.235";
+        bool TextChange = false;
 
         public DesktopForm()
         {
@@ -30,6 +31,7 @@ namespace TaxiDesktopClient
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            PhoneBox.Text = "+70000000000";
             if (!DesktopClient.Connect(IP, Port))
             {
                 MessageBox.Show("Не удается подключиться к серверу");
@@ -91,7 +93,6 @@ namespace TaxiDesktopClient
             else
             {
                 OrderButton.Visible = false;
-                labelPrice.Text = "Цена:" + System.Convert.ToString(DesktopClient.GetPrice());
                 labelPrice.Visible = true;
                 labelProcessing.Visible = true;
                 NameBox.Enabled = false;
@@ -132,13 +133,20 @@ namespace TaxiDesktopClient
             {
                 Map.DrawPos(DesktopClient.GetDriverPossition());
             }
+            if (TextChange)
+            {
+                if ((FromAddressBox.Text != "" || (textBoxFromX.Text != "" && textBoxFromY.Text != "")) && (ToAddressBox.Text != "" || (textBoxToX.Text != "" && textBoxToY.Text != "")))
+                {
+                    labelPrice.Text = "Цена: " + DesktopClient.GetPrice(FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text)+" руб.";
+                    TextChange = false;
+                }
+            }
         }
 
         private void buttonAbort_Click(object sender, EventArgs e)
         {
             DesktopClient.AbortOrder();
             OrderButton.Visible = true;
-            labelPrice.Visible = false;
             labelProcessing.Visible = false;
             NameBox.Enabled = true;
             PhoneBox.Enabled = true;
@@ -178,6 +186,11 @@ namespace TaxiDesktopClient
             Map.MapMode = 1;
             Map.SetInit();
             Map.ShowDialog();           
+        }
+
+        private void StartFinishTextChanged(object sender, EventArgs e)
+        {
+            TextChange = true;
         }
     }
 }
