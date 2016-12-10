@@ -137,7 +137,15 @@ namespace TaxiDesktopClient
             {
                 if ((FromAddressBox.Text != "" || (textBoxFromX.Text != "" && textBoxFromY.Text != "")) && (ToAddressBox.Text != "" || (textBoxToX.Text != "" && textBoxToY.Text != "")))
                 {
-                    labelPrice.Text = "Цена: " + DesktopClient.GetPrice(FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text)+" руб.";
+                    decimal Tmp = DesktopClient.GetPrice(FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text);
+                    if (Tmp != (-1))
+                    {
+                        labelPrice.Text = "Цена: " + DesktopClient.GetPrice(FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text) + " руб.";
+                    }
+                    else
+                    {
+                        labelPrice.Text = "Цена: ";
+                    }
                     TextChange = false;
                 }
             }
