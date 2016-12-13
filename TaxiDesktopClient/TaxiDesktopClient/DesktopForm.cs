@@ -18,9 +18,9 @@ namespace TaxiDesktopClient
         Client DesktopClient= new Client();
         List<string> Extra = new List<string>();
         int Phase = 0;
-        int Port = 10083;
+        //int Port = 10083;
         string IP = "127.0.0.1";
-        //int Port = 4040;        
+        int Port = 4040;        
         //string IP = "95.79.210.235";
         bool TextChange = false;
         Tuple<double, double> MapCenter = new Tuple<double,double>(56.299520, 43.982913);
@@ -131,8 +131,8 @@ namespace TaxiDesktopClient
                 buttonMapFrom.Enabled = false;
                 buttonMapTo.Enabled = false;
                 labelOperatorPhone.Text = "Связь с оператором: " + DesktopClient.GetOperatorPhone();
-                sStart = DesktopClient.GetStartPossition();
-                sFinish = DesktopClient.GetFinishPossition();
+                sStart = DesktopClient.GetStartPosition();
+                sFinish = DesktopClient.GetFinishPosition();
             }
         }
 
@@ -153,7 +153,7 @@ namespace TaxiDesktopClient
             }
             if (Phase==2)
             {
-                sDriver=DesktopClient.GetDriverPossition();
+                sDriver=DesktopClient.GetDriverPosition();
                 string ImageUrl = GetUrl(MapCenter, sStart, sFinish, sDriver, zPos, pictureBoxYandexMap.Width, pictureBoxYandexMap.Height);
                 pictureBoxYandexMap.Image = geoCode.DownloadMapImage(ImageUrl);
                 pictureBoxYandexMap.Refresh();

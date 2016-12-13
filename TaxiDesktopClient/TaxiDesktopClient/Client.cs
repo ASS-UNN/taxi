@@ -90,13 +90,13 @@ namespace TaxiDesktopClient
             this.clientOrder.OrderStatus = -1;
         }
 
-        public string GetDriverPossition()
+        public string GetDriverPosition()
         {
             this.clientOrder.DriverPosition = clientService.ServiceProxy.GetDriverPosition(this.clientOrder.OrderID);
             return (this.clientOrder.DriverPosition);
         }
 
-        public string GetStartPossition()
+        public string GetStartPosition()
         {
             YandexAPI.Maps.GeoCode geoCode = new GeoCode();
             if (clientOrder.orderStartGeographicalLatitude != "" && clientOrder.orderStartGeographicalLongitude != "")
@@ -110,7 +110,7 @@ namespace TaxiDesktopClient
             }
             return ("");
         }
-        public string GetFinishPossition()
+        public string GetFinishPosition()
         {
             YandexAPI.Maps.GeoCode geoCode = new GeoCode();
             if (clientOrder.orderFinishGeographicalLatitude != "" && clientOrder.orderFinishGeographicalLongitude != "")
