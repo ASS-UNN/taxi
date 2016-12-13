@@ -104,3 +104,14 @@ D:\My_programs\Taxi\TaxiDesktopClient_021\TaxiDesktopClient\obj\x86\Release\Taxi
 D:\My_programs\Taxi\TaxiDesktopClient_021\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.csproj.GenerateResource.Cache
 D:\My_programs\Taxi\TaxiDesktopClient_021\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.exe
 D:\My_programs\Taxi\TaxiDesktopClient_021\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.pdb
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.exe
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.pdb
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex_004\TaxiDesktopClient\bin\Release\TaxiDesktopClient.exe
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex_004\TaxiDesktopClient\bin\Release\TaxiDesktopClient.pdb
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex_004\TaxiDesktopClient\bin\Release\Scs.dll
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex_004\TaxiDesktopClient\bin\Release\YandexAPI.dll
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex_004\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.DesktopForm.resources
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex_004\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.Properties.Resources.resources
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex_004\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.csproj.GenerateResource.Cache
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex_004\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.exe
+D:\My_programs\Taxi\TaxiDesktopClient_021_yandex_004\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.pdb

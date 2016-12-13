@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.ScsServices.Client;
+using YandexAPI.Maps;
 
 namespace TaxiDesktopClient
 {
@@ -42,6 +43,7 @@ namespace TaxiDesktopClient
                 this.clientOrder.OrderID = ID;
                 this.clientOrder.OperatorPhone = clientService.ServiceProxy.GetOperatorPhone();
                 this.clientOrder.costOfOrder = clientService.ServiceProxy.GetPrice(orderStartAddress, orderStartGeographicalLatitude, orderStartGeographicalLongitude, orderFinishAddress, orderFinishGeographicalLatitude, orderFinishGeographicalLongitude);
+
                 return true;
             }
             return false;
@@ -88,10 +90,39 @@ namespace TaxiDesktopClient
             this.clientOrder.OrderStatus = -1;
         }
 
-        public Tuple<float,float> GetDriverPossition()
+        public string GetDriverPossition()
         {
             this.clientOrder.DriverPosition = clientService.ServiceProxy.GetDriverPosition(this.clientOrder.OrderID);
             return (this.clientOrder.DriverPosition);
+        }
+
+        public string GetStartPossition()
+        {
+            YandexAPI.Maps.GeoCode geoCode = new GeoCode();
+            if (clientOrder.orderStartGeographicalLatitude != "" && clientOrder.orderStartGeographicalLongitude != "")
+            {
+                return (clientOrder.orderStartGeographicalLatitude + "," + clientOrder.orderStartGeographicalLongitude);
+            }
+            if (clientOrder.orderStartAddress != "")
+            {
+                string ResultSearchObject = geoCode.SearchObject(clientOrder.orderStartAddress);
+                return (geoCode.GetPoint(ResultSearchObject));
+            }
+            return ("");
+        }
+        public string GetFinishPossition()
+        {
+            YandexAPI.Maps.GeoCode geoCode = new GeoCode();
+            if (clientOrder.orderFinishGeographicalLatitude != "" && clientOrder.orderFinishGeographicalLongitude != "")
+            {
+                return (clientOrder.orderFinishGeographicalLatitude + "," + clientOrder.orderFinishGeographicalLongitude);
+            }
+            if (clientOrder.orderFinishAddress != "")
+            {
+                string ResultSearchObject = geoCode.SearchObject(clientOrder.orderFinishAddress);
+                return (geoCode.GetPoint(ResultSearchObject));
+            }
+            return ("");
         }
     }
 }

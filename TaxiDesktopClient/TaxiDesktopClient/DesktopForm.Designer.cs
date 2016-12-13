@@ -61,9 +61,12 @@
             this.labelDriverPhone = new System.Windows.Forms.Label();
             this.labelOperatorPhone = new System.Windows.Forms.Label();
             this.buttonAbort = new System.Windows.Forms.Button();
-            this.buttonDriverPos = new System.Windows.Forms.Button();
             this.buttonMapFrom = new System.Windows.Forms.Button();
             this.buttonMapTo = new System.Windows.Forms.Button();
+            this.pictureBoxYandexMap = new System.Windows.Forms.PictureBox();
+            this.buttonPlus = new System.Windows.Forms.Button();
+            this.buttonMinus = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxYandexMap)).BeginInit();
             this.SuspendLayout();
             // 
             // NameBox
@@ -72,6 +75,7 @@
             this.NameBox.Name = "NameBox";
             this.NameBox.Size = new System.Drawing.Size(527, 20);
             this.NameBox.TabIndex = 0;
+            this.NameBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoveKey);
             // 
             // labelName
             // 
@@ -372,24 +376,13 @@
             this.buttonAbort.Visible = false;
             this.buttonAbort.Click += new System.EventHandler(this.buttonAbort_Click);
             // 
-            // buttonDriverPos
-            // 
-            this.buttonDriverPos.Location = new System.Drawing.Point(274, 246);
-            this.buttonDriverPos.Name = "buttonDriverPos";
-            this.buttonDriverPos.Size = new System.Drawing.Size(218, 68);
-            this.buttonDriverPos.TabIndex = 31;
-            this.buttonDriverPos.Text = "Положение водителя";
-            this.buttonDriverPos.UseVisualStyleBackColor = true;
-            this.buttonDriverPos.Visible = false;
-            this.buttonDriverPos.Click += new System.EventHandler(this.buttonDriverPos_Click);
-            // 
             // buttonMapFrom
             // 
             this.buttonMapFrom.Location = new System.Drawing.Point(192, 95);
             this.buttonMapFrom.Name = "buttonMapFrom";
             this.buttonMapFrom.Size = new System.Drawing.Size(66, 35);
             this.buttonMapFrom.TabIndex = 32;
-            this.buttonMapFrom.Text = "Карта";
+            this.buttonMapFrom.Text = "Указать на карте";
             this.buttonMapFrom.UseVisualStyleBackColor = true;
             this.buttonMapFrom.Visible = false;
             this.buttonMapFrom.Click += new System.EventHandler(this.buttonMapFrom_Click);
@@ -400,19 +393,55 @@
             this.buttonMapTo.Name = "buttonMapTo";
             this.buttonMapTo.Size = new System.Drawing.Size(66, 35);
             this.buttonMapTo.TabIndex = 33;
-            this.buttonMapTo.Text = "Карта";
+            this.buttonMapTo.Text = "Указать на карте";
             this.buttonMapTo.UseVisualStyleBackColor = true;
             this.buttonMapTo.Visible = false;
             this.buttonMapTo.Click += new System.EventHandler(this.buttonMapTo_Click);
+            // 
+            // pictureBoxYandexMap
+            // 
+            this.pictureBoxYandexMap.Location = new System.Drawing.Point(272, 347);
+            this.pictureBoxYandexMap.Name = "pictureBoxYandexMap";
+            this.pictureBoxYandexMap.Size = new System.Drawing.Size(506, 307);
+            this.pictureBoxYandexMap.TabIndex = 34;
+            this.pictureBoxYandexMap.TabStop = false;
+            this.pictureBoxYandexMap.Click += new System.EventHandler(this.pictureBoxYandexMap_Click);
+            this.pictureBoxYandexMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MapMoveOn);
+            this.pictureBoxYandexMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MapMoveEvent);
+            this.pictureBoxYandexMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MapMoveOff);
+            // 
+            // buttonPlus
+            // 
+            this.buttonPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonPlus.Location = new System.Drawing.Point(791, 347);
+            this.buttonPlus.Name = "buttonPlus";
+            this.buttonPlus.Size = new System.Drawing.Size(63, 55);
+            this.buttonPlus.TabIndex = 35;
+            this.buttonPlus.Text = "+";
+            this.buttonPlus.UseVisualStyleBackColor = true;
+            this.buttonPlus.Click += new System.EventHandler(this.buttonPlus_Click);
+            // 
+            // buttonMinus
+            // 
+            this.buttonMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonMinus.Location = new System.Drawing.Point(791, 408);
+            this.buttonMinus.Name = "buttonMinus";
+            this.buttonMinus.Size = new System.Drawing.Size(63, 55);
+            this.buttonMinus.TabIndex = 36;
+            this.buttonMinus.Text = "-";
+            this.buttonMinus.UseVisualStyleBackColor = true;
+            this.buttonMinus.Click += new System.EventHandler(this.buttonMinus_Click);
             // 
             // DesktopForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(815, 459);
+            this.ClientSize = new System.Drawing.Size(878, 681);
+            this.Controls.Add(this.buttonMinus);
+            this.Controls.Add(this.buttonPlus);
+            this.Controls.Add(this.pictureBoxYandexMap);
             this.Controls.Add(this.buttonMapTo);
             this.Controls.Add(this.buttonMapFrom);
-            this.Controls.Add(this.buttonDriverPos);
             this.Controls.Add(this.buttonAbort);
             this.Controls.Add(this.labelOperatorPhone);
             this.Controls.Add(this.labelDriverPhone);
@@ -447,6 +476,9 @@
             this.Name = "DesktopForm";
             this.Text = "DesktopClient";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Click += new System.EventHandler(this.FocusForm);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoveKey);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxYandexMap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -486,9 +518,11 @@
         private System.Windows.Forms.Label labelDriverPhone;
         private System.Windows.Forms.Label labelOperatorPhone;
         private System.Windows.Forms.Button buttonAbort;
-        private System.Windows.Forms.Button buttonDriverPos;
         private System.Windows.Forms.Button buttonMapFrom;
         private System.Windows.Forms.Button buttonMapTo;
+        private System.Windows.Forms.PictureBox pictureBoxYandexMap;
+        private System.Windows.Forms.Button buttonPlus;
+        private System.Windows.Forms.Button buttonMinus;
     }
 }
 
