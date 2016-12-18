@@ -16,8 +16,9 @@ namespace TaxiDesktopClient
     public partial class DesktopForm : Form
     {
         Client DesktopClient= new Client();
-        List<string> Extra = new List<string>();
+        List<int> Extra = new List<int>();
         int Phase = 0;
+        string Search;
         //int Port = 10083;
         string IP = "127.0.0.1";
         int Port = 4040;        
@@ -51,8 +52,8 @@ namespace TaxiDesktopClient
             {
                 MessageBox.Show("Не удается подключиться к серверу");
                 Close();
-            }          
-            MapCenter = new Tuple<double, double>(43.982913,56.299520);
+            }
+            MapCenter = new Tuple<double, double>(56.299520, 43.982913);
             Start = new Tuple<double, double>(0, 0);
             Finish = new Tuple<double, double>(0, 0);
             string ImageUrl = GetUrl(MapCenter, Start, Finish, zPos, pictureBoxYandexMap.Width, pictureBoxYandexMap.Height);
@@ -62,8 +63,6 @@ namespace TaxiDesktopClient
 
         private void buttonFromAddress_Click(object sender, EventArgs e)
         {
-            buttonFromAddress.Visible = false;
-            buttonFromCoord.Visible = false;
             FromAddressBox.Visible = true;
             FromAddressLabel.Visible = true;
             FromAddressBox.Visible = true;
@@ -71,8 +70,6 @@ namespace TaxiDesktopClient
 
         private void buttonFromCoord_Click(object sender, EventArgs e)
         {
-            buttonFromAddress.Visible = false;
-            buttonFromCoord.Visible = false;
             labelFromX.Visible = true;
             labelFromY.Visible = true;
             textBoxFromX.Visible = true;
@@ -82,8 +79,6 @@ namespace TaxiDesktopClient
 
         private void buttonToAddress_Click(object sender, EventArgs e)
         {
-            buttonToAddress.Visible = false;
-            buttonToCoord.Visible = false;
             ToAddressBox.Visible = true;
             ToAddressLabel.Visible = true;
             ToAddressBox.Visible = true;
@@ -91,8 +86,6 @@ namespace TaxiDesktopClient
 
         private void buttonToCoord_Click(object sender, EventArgs e)
         {
-            buttonToAddress.Visible = false;
-            buttonToCoord.Visible = false;
             labelToX.Visible = true;
             labelToY.Visible = true;
             textBoxToX.Visible = true;
@@ -103,9 +96,9 @@ namespace TaxiDesktopClient
         private void OrderButton_Click(object sender, EventArgs e)
         {
             Extra.Clear();
-            foreach (string s in ExtracheckedListBox.CheckedItems)
+            foreach (int s in ExtracheckedListBox.CheckedIndices)
             {
-                Extra.Add(s);
+                Extra.Add(s+1);
             }
             if (!DesktopClient.CreateOrder(NameBox.Text, PhoneBox.Text, FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text, Extra))
             {
@@ -160,18 +153,81 @@ namespace TaxiDesktopClient
             }
             if (TextChange)
             {
-                if ((FromAddressBox.Text != "" || (textBoxFromX.Text != "" && textBoxFromY.Text != "")) && (ToAddressBox.Text != "" || (textBoxToX.Text != "" && textBoxToY.Text != "")))
+                if (textBoxFromX.Text != "" && textBoxFromY.Text != "" && textBoxToX.Text != "" && textBoxToY.Text != "")
                 {
-                    decimal Tmp = DesktopClient.GetPrice(FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text);
+                    decimal Tmp = DesktopClient.GetPrice(textBoxFromX.Text, textBoxFromY.Text,textBoxToX.Text, textBoxToY.Text);
                     if (Tmp != (-1))
                     {
-                        labelPrice.Text = "Цена: " + DesktopClient.GetPrice(FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text) + " руб.";
+                        labelPrice.Text = "Цена: " + DesktopClient.GetPrice(textBoxFromX.Text, textBoxFromY.Text, textBoxToX.Text, textBoxToY.Text) + " руб.";
                     }
                     else
                     {
                         labelPrice.Text = "Цена: ";
                     }
                     TextChange = false;
+                }
+                if (FromAddressBox.Text == "")
+                {
+                    try
+                    {
+                        Search = geoCode.SearchObject(System.Convert.ToDouble(textBoxFromY.Text, CultureInfo.InvariantCulture), System.Convert.ToDouble(textBoxFromX.Text, CultureInfo.InvariantCulture));
+                        Search = geoCode.GetAddress(Search);
+                        FromAddressBox.Text = Search;
+                    }
+                    catch
+                    {
+                    }                  
+                }
+                if (textBoxFromX.Text == "" || textBoxFromY.Text == "")
+                {
+                    try
+                    {
+                        Search = geoCode.SearchObject(FromAddressBox.Text);
+                        Search = geoCode.GetPoint(Search);
+                        int Comm = 0;
+                        Comm = Search.IndexOf(",");
+                        if (Comm > -1)
+                        {
+                            textBoxFromY.Text = Search.Substring(0, Comm);
+                            textBoxFromX.Text = Search.Substring(Comm + 1);
+                        }
+                    }
+                    catch
+                    {
+                    }
+                    
+                }
+                if (ToAddressBox.Text == "")
+                {
+                    try
+                    {
+                        Search = geoCode.SearchObject(System.Convert.ToDouble(textBoxToY.Text, CultureInfo.InvariantCulture), System.Convert.ToDouble(textBoxToX.Text, CultureInfo.InvariantCulture));
+                        Search = geoCode.GetAddress(Search);
+                        ToAddressBox.Text = Search;
+                    }
+                    catch
+                    {
+                    }
+                    
+                }
+                if (textBoxToX.Text == "" || textBoxToY.Text == "")
+                {
+                    try
+                    {
+                        Search = geoCode.SearchObject(ToAddressBox.Text);
+                        Search = geoCode.GetPoint(Search);
+                        int Comm = 0;
+                        Comm = Search.IndexOf(",");
+                        if (Comm > -1)
+                        {
+                            textBoxToY.Text = Search.Substring(0, Comm);
+                            textBoxToX.Text = Search.Substring(Comm + 1);
+                        }
+
+                    }
+                    catch
+                    {
+                    }
                 }
             }
         }
@@ -214,11 +270,6 @@ namespace TaxiDesktopClient
             MapMode = 1;
         }
 
-        private void StartFinishTextChanged(object sender, EventArgs e)
-        {
-            TextChange = true;
-        }
-
         private void MapMoveOn(object sender, MouseEventArgs e)
         {
             MapMove = true;
@@ -236,7 +287,7 @@ namespace TaxiDesktopClient
             {
                 double dx = e.X - MapMoveStart.Item1;
                 double dy = e.Y - MapMoveStart.Item2;
-                MapCenter = new Tuple<double, double>(MapCenter.Item1 - dx * 0.5*kx / pictureBoxYandexMap.Width, MapCenter.Item2 + dy * 0.5*ky / pictureBoxYandexMap.Height);
+                MapCenter = new Tuple<double, double>(MapCenter.Item1 + dy * 0.5 * ky / pictureBoxYandexMap.Height, MapCenter.Item2 - dx * 0.5 * kx / pictureBoxYandexMap.Width);
                 string ImageUrl;
                 if (Phase == 2)
                 {
@@ -263,15 +314,15 @@ namespace TaxiDesktopClient
         private string GetUrl(Tuple<double, double> Center, Tuple<double, double> Start, Tuple<double, double> Finish, int zPos, int Width, int Height)
         {
             
-            string pCenter = Center.Item1.ToString("G", CultureInfo.InvariantCulture) + "," + Center.Item2.ToString("G", CultureInfo.InvariantCulture);
-            string pStart =Start.Item1.ToString("G", CultureInfo.InvariantCulture) + "," +Start.Item2.ToString("G", CultureInfo.InvariantCulture);
-            string pFinish =Finish.Item1.ToString("G", CultureInfo.InvariantCulture) + "," + Finish.Item2.ToString("G", CultureInfo.InvariantCulture);
+            string pCenter = Center.Item2.ToString("G", CultureInfo.InvariantCulture) + "," + Center.Item1.ToString("G", CultureInfo.InvariantCulture);
+            string pStart =Start.Item2.ToString("G", CultureInfo.InvariantCulture) + "," +Start.Item1.ToString("G", CultureInfo.InvariantCulture);
+            string pFinish =Finish.Item2.ToString("G", CultureInfo.InvariantCulture) + "," + Finish.Item1.ToString("G", CultureInfo.InvariantCulture);
             return String.Format("http://static-maps.yandex.ru/1.x/?ll={0}&size={3},{4}&z={5}&l=map&pt={1},pm2al~{2},pm2bl&lang=ru-RU", pCenter,pStart,pFinish, Width, Height, zPos);
         }
         private string GetUrl(Tuple<double, double> Center, string Start, string Finish, string Driver, int zPos, int Width, int Height)
         {
 
-            string pCenter = Center.Item1.ToString("G", CultureInfo.InvariantCulture) + "," + Center.Item2.ToString("G", CultureInfo.InvariantCulture);
+            string pCenter = Center.Item2.ToString("G", CultureInfo.InvariantCulture) + "," + Center.Item1.ToString("G", CultureInfo.InvariantCulture);
             return String.Format("http://static-maps.yandex.ru/1.x/?ll={0}&size={4},{5}&z={6}&l=map&pt={1},pm2al~{2},pm2bl~{3},flag&lang=ru-RU", pCenter, Start, Finish, Driver, Width, Height, zPos);
         }
 
@@ -308,23 +359,69 @@ namespace TaxiDesktopClient
             double dy = M.Y - pictureBoxYandexMap.Height / 2;
             if (MapMode == 0)
             {
-                Start = new Tuple<double, double>(MapCenter.Item1 + dx * kx / pictureBoxYandexMap.Width, MapCenter.Item2 - dy * ky / pictureBoxYandexMap.Height);
+                //Start = new Tuple<double, double>(MapCenter.Item1 + dx * kx / pictureBoxYandexMap.Width, MapCenter.Item2 - dy * ky / pictureBoxYandexMap.Height);
+                Start = new Tuple<double, double>(MapCenter.Item1 - dy * ky / pictureBoxYandexMap.Height, MapCenter.Item2 + dx * kx / pictureBoxYandexMap.Width);
                 MapMode = -1;
+                string Search = geoCode.SearchObject(Start.Item2, Start.Item1);
+                string StartAddress = geoCode.GetAddress(Search);               
                 textBoxFromX.Text = Start.Item1.ToString("G", CultureInfo.InvariantCulture);
                 textBoxFromY.Text = Start.Item2.ToString("G", CultureInfo.InvariantCulture);
+                FromAddressBox.Text = StartAddress;
                 string ImageUrl = GetUrl(MapCenter, Start, Finish, zPos, pictureBoxYandexMap.Width, pictureBoxYandexMap.Height);
                 pictureBoxYandexMap.Image = geoCode.DownloadMapImage(ImageUrl);
                 pictureBoxYandexMap.Refresh();
             }
             if (MapMode == 1)
             {
-                Finish = new Tuple<double, double>(MapCenter.Item1 + dx * kx / pictureBoxYandexMap.Width, MapCenter.Item2 - dy * ky / pictureBoxYandexMap.Height);
+                //Finish = new Tuple<double, double>(MapCenter.Item1 + dx * kx / pictureBoxYandexMap.Width, MapCenter.Item2 - dy * ky / pictureBoxYandexMap.Height);
+                Finish = new Tuple<double, double>(MapCenter.Item1 - dy * ky / pictureBoxYandexMap.Height, MapCenter.Item2 + dx * kx / pictureBoxYandexMap.Width);
                 MapMode = -1;
+                string Search = geoCode.SearchObject(Finish.Item2, Finish.Item1);
+                string FinishAddress = geoCode.GetAddress(Search);                
                 textBoxToX.Text = Finish.Item1.ToString("G", CultureInfo.InvariantCulture);
                 textBoxToY.Text = Finish.Item2.ToString("G", CultureInfo.InvariantCulture);
+                ToAddressBox.Text = FinishAddress;
                 string ImageUrl = GetUrl(MapCenter, Start, Finish, zPos, pictureBoxYandexMap.Width, pictureBoxYandexMap.Height);
                 pictureBoxYandexMap.Image = geoCode.DownloadMapImage(ImageUrl);
                 pictureBoxYandexMap.Refresh();
+            }
+        }
+
+        private void FromCoordChange(object sender, EventArgs e)
+        {
+            TextChange = true;
+            if (textBoxFromX.Focused || textBoxFromY.Focused)
+            {
+                FromAddressBox.Text = "";
+            }
+        }
+
+        private void ToCoordChange(object sender, EventArgs e)
+        {
+            TextChange = true;
+            if (textBoxToX.Focused || textBoxToY.Focused)
+            {
+                ToAddressBox.Text = "";
+            }
+        }
+
+        private void FromAddressChange(object sender, EventArgs e)
+        {
+            TextChange = true;
+            if (FromAddressBox.Focused)
+            {
+                textBoxFromX.Text = "";
+                textBoxFromY.Text = "";
+            }
+        }
+
+        private void ToAddressChange(object sender, EventArgs e)
+        {
+            TextChange = true;
+            if (ToAddressBox.Focused)
+            {
+                textBoxToX.Text = "";
+                textBoxToY.Text = "";
             }
         }
     }

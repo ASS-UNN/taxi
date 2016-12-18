@@ -35,10 +35,6 @@
             this.PhoneBox = new System.Windows.Forms.TextBox();
             this.labelFrom = new System.Windows.Forms.Label();
             this.labelTo = new System.Windows.Forms.Label();
-            this.buttonFromAddress = new System.Windows.Forms.Button();
-            this.buttonFromCoord = new System.Windows.Forms.Button();
-            this.buttonToAddress = new System.Windows.Forms.Button();
-            this.buttonToCoord = new System.Windows.Forms.Button();
             this.FromAddressBox = new System.Windows.Forms.TextBox();
             this.FromAddressLabel = new System.Windows.Forms.Label();
             this.labelFromX = new System.Windows.Forms.Label();
@@ -114,60 +110,19 @@
             // labelTo
             // 
             this.labelTo.AutoSize = true;
-            this.labelTo.Location = new System.Drawing.Point(15, 133);
+            this.labelTo.Location = new System.Drawing.Point(16, 160);
             this.labelTo.Name = "labelTo";
             this.labelTo.Size = new System.Drawing.Size(34, 13);
             this.labelTo.TabIndex = 5;
             this.labelTo.Text = "Куда:";
             // 
-            // buttonFromAddress
-            // 
-            this.buttonFromAddress.Location = new System.Drawing.Point(15, 95);
-            this.buttonFromAddress.Name = "buttonFromAddress";
-            this.buttonFromAddress.Size = new System.Drawing.Size(82, 35);
-            this.buttonFromAddress.TabIndex = 6;
-            this.buttonFromAddress.Text = "Адрес";
-            this.buttonFromAddress.UseVisualStyleBackColor = true;
-            this.buttonFromAddress.Click += new System.EventHandler(this.buttonFromAddress_Click);
-            // 
-            // buttonFromCoord
-            // 
-            this.buttonFromCoord.Location = new System.Drawing.Point(103, 95);
-            this.buttonFromCoord.Name = "buttonFromCoord";
-            this.buttonFromCoord.Size = new System.Drawing.Size(82, 35);
-            this.buttonFromCoord.TabIndex = 7;
-            this.buttonFromCoord.Text = "Координаты";
-            this.buttonFromCoord.UseVisualStyleBackColor = true;
-            this.buttonFromCoord.Click += new System.EventHandler(this.buttonFromCoord_Click);
-            // 
-            // buttonToAddress
-            // 
-            this.buttonToAddress.Location = new System.Drawing.Point(15, 149);
-            this.buttonToAddress.Name = "buttonToAddress";
-            this.buttonToAddress.Size = new System.Drawing.Size(82, 35);
-            this.buttonToAddress.TabIndex = 8;
-            this.buttonToAddress.Text = "Адрес";
-            this.buttonToAddress.UseVisualStyleBackColor = true;
-            this.buttonToAddress.Click += new System.EventHandler(this.buttonToAddress_Click);
-            // 
-            // buttonToCoord
-            // 
-            this.buttonToCoord.Location = new System.Drawing.Point(103, 149);
-            this.buttonToCoord.Name = "buttonToCoord";
-            this.buttonToCoord.Size = new System.Drawing.Size(82, 35);
-            this.buttonToCoord.TabIndex = 9;
-            this.buttonToCoord.Text = "Координаты";
-            this.buttonToCoord.UseVisualStyleBackColor = true;
-            this.buttonToCoord.Click += new System.EventHandler(this.buttonToCoord_Click);
-            // 
             // FromAddressBox
             // 
             this.FromAddressBox.Location = new System.Drawing.Point(62, 103);
             this.FromAddressBox.Name = "FromAddressBox";
-            this.FromAddressBox.Size = new System.Drawing.Size(100, 20);
+            this.FromAddressBox.Size = new System.Drawing.Size(344, 20);
             this.FromAddressBox.TabIndex = 10;
-            this.FromAddressBox.Visible = false;
-            this.FromAddressBox.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
+            this.FromAddressBox.TextChanged += new System.EventHandler(this.FromAddressChange);
             // 
             // FromAddressLabel
             // 
@@ -177,102 +132,91 @@
             this.FromAddressLabel.Size = new System.Drawing.Size(41, 13);
             this.FromAddressLabel.TabIndex = 11;
             this.FromAddressLabel.Text = "Адрес:";
-            this.FromAddressLabel.Visible = false;
             // 
             // labelFromX
             // 
             this.labelFromX.AutoSize = true;
-            this.labelFromX.Location = new System.Drawing.Point(16, 106);
+            this.labelFromX.Location = new System.Drawing.Point(16, 132);
             this.labelFromX.Name = "labelFromX";
-            this.labelFromX.Size = new System.Drawing.Size(15, 13);
+            this.labelFromX.Size = new System.Drawing.Size(18, 13);
             this.labelFromX.TabIndex = 12;
-            this.labelFromX.Text = "x:";
-            this.labelFromX.Visible = false;
+            this.labelFromX.Text = "ш:";
             // 
             // textBoxFromX
             // 
-            this.textBoxFromX.Location = new System.Drawing.Point(37, 103);
+            this.textBoxFromX.Location = new System.Drawing.Point(37, 129);
             this.textBoxFromX.Name = "textBoxFromX";
-            this.textBoxFromX.Size = new System.Drawing.Size(54, 20);
+            this.textBoxFromX.Size = new System.Drawing.Size(170, 20);
             this.textBoxFromX.TabIndex = 13;
-            this.textBoxFromX.Visible = false;
-            this.textBoxFromX.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
+            this.textBoxFromX.TextChanged += new System.EventHandler(this.FromCoordChange);
             // 
             // labelFromY
             // 
             this.labelFromY.AutoSize = true;
-            this.labelFromY.Location = new System.Drawing.Point(97, 106);
+            this.labelFromY.Location = new System.Drawing.Point(215, 132);
             this.labelFromY.Name = "labelFromY";
-            this.labelFromY.Size = new System.Drawing.Size(15, 13);
+            this.labelFromY.Size = new System.Drawing.Size(16, 13);
             this.labelFromY.TabIndex = 14;
-            this.labelFromY.Text = "y:";
-            this.labelFromY.Visible = false;
+            this.labelFromY.Text = "д:";
             // 
             // textBoxFromY
             // 
-            this.textBoxFromY.Location = new System.Drawing.Point(118, 103);
+            this.textBoxFromY.Location = new System.Drawing.Point(236, 129);
             this.textBoxFromY.Name = "textBoxFromY";
-            this.textBoxFromY.Size = new System.Drawing.Size(54, 20);
+            this.textBoxFromY.Size = new System.Drawing.Size(170, 20);
             this.textBoxFromY.TabIndex = 15;
-            this.textBoxFromY.Visible = false;
-            this.textBoxFromY.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
+            this.textBoxFromY.TextChanged += new System.EventHandler(this.FromCoordChange);
             // 
             // textBoxToY
             // 
-            this.textBoxToY.Location = new System.Drawing.Point(118, 157);
+            this.textBoxToY.Location = new System.Drawing.Point(236, 203);
             this.textBoxToY.Name = "textBoxToY";
-            this.textBoxToY.Size = new System.Drawing.Size(54, 20);
+            this.textBoxToY.Size = new System.Drawing.Size(170, 20);
             this.textBoxToY.TabIndex = 19;
-            this.textBoxToY.Visible = false;
-            this.textBoxToY.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
+            this.textBoxToY.TextChanged += new System.EventHandler(this.ToCoordChange);
             // 
             // labelToY
             // 
             this.labelToY.AutoSize = true;
-            this.labelToY.Location = new System.Drawing.Point(97, 160);
+            this.labelToY.Location = new System.Drawing.Point(215, 206);
             this.labelToY.Name = "labelToY";
-            this.labelToY.Size = new System.Drawing.Size(15, 13);
+            this.labelToY.Size = new System.Drawing.Size(16, 13);
             this.labelToY.TabIndex = 18;
-            this.labelToY.Text = "y:";
-            this.labelToY.Visible = false;
+            this.labelToY.Text = "д:";
             // 
             // textBoxToX
             // 
-            this.textBoxToX.Location = new System.Drawing.Point(37, 157);
+            this.textBoxToX.Location = new System.Drawing.Point(37, 203);
             this.textBoxToX.Name = "textBoxToX";
-            this.textBoxToX.Size = new System.Drawing.Size(54, 20);
+            this.textBoxToX.Size = new System.Drawing.Size(170, 20);
             this.textBoxToX.TabIndex = 17;
-            this.textBoxToX.Visible = false;
-            this.textBoxToX.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
+            this.textBoxToX.TextChanged += new System.EventHandler(this.ToCoordChange);
             // 
             // labelToX
             // 
             this.labelToX.AutoSize = true;
-            this.labelToX.Location = new System.Drawing.Point(16, 160);
+            this.labelToX.Location = new System.Drawing.Point(16, 206);
             this.labelToX.Name = "labelToX";
-            this.labelToX.Size = new System.Drawing.Size(15, 13);
+            this.labelToX.Size = new System.Drawing.Size(18, 13);
             this.labelToX.TabIndex = 16;
-            this.labelToX.Text = "x:";
-            this.labelToX.Visible = false;
+            this.labelToX.Text = "ш:";
             // 
             // ToAddressLabel
             // 
             this.ToAddressLabel.AutoSize = true;
-            this.ToAddressLabel.Location = new System.Drawing.Point(15, 160);
+            this.ToAddressLabel.Location = new System.Drawing.Point(15, 180);
             this.ToAddressLabel.Name = "ToAddressLabel";
             this.ToAddressLabel.Size = new System.Drawing.Size(41, 13);
             this.ToAddressLabel.TabIndex = 21;
             this.ToAddressLabel.Text = "Адрес:";
-            this.ToAddressLabel.Visible = false;
             // 
             // ToAddressBox
             // 
-            this.ToAddressBox.Location = new System.Drawing.Point(62, 157);
+            this.ToAddressBox.Location = new System.Drawing.Point(62, 177);
             this.ToAddressBox.Name = "ToAddressBox";
-            this.ToAddressBox.Size = new System.Drawing.Size(100, 20);
+            this.ToAddressBox.Size = new System.Drawing.Size(344, 20);
             this.ToAddressBox.TabIndex = 20;
-            this.ToAddressBox.Visible = false;
-            this.ToAddressBox.TextChanged += new System.EventHandler(this.StartFinishTextChanged);
+            this.ToAddressBox.TextChanged += new System.EventHandler(this.ToAddressChange);
             // 
             // ExtracheckedListBox
             // 
@@ -285,7 +229,7 @@
             "Кузов \"универсал\"",
             "Молчаливый водитель",
             "Водитель-женщина"});
-            this.ExtracheckedListBox.Location = new System.Drawing.Point(15, 216);
+            this.ExtracheckedListBox.Location = new System.Drawing.Point(18, 260);
             this.ExtracheckedListBox.Name = "ExtracheckedListBox";
             this.ExtracheckedListBox.Size = new System.Drawing.Size(170, 124);
             this.ExtracheckedListBox.TabIndex = 22;
@@ -293,7 +237,7 @@
             // Extralabel
             // 
             this.Extralabel.AutoSize = true;
-            this.Extralabel.Location = new System.Drawing.Point(16, 200);
+            this.Extralabel.Location = new System.Drawing.Point(19, 244);
             this.Extralabel.Name = "Extralabel";
             this.Extralabel.Size = new System.Drawing.Size(160, 13);
             this.Extralabel.TabIndex = 23;
@@ -301,7 +245,7 @@
             // 
             // OrderButton
             // 
-            this.OrderButton.Location = new System.Drawing.Point(13, 347);
+            this.OrderButton.Location = new System.Drawing.Point(16, 391);
             this.OrderButton.Name = "OrderButton";
             this.OrderButton.Size = new System.Drawing.Size(99, 47);
             this.OrderButton.TabIndex = 24;
@@ -312,7 +256,7 @@
             // labelPrice
             // 
             this.labelPrice.AutoSize = true;
-            this.labelPrice.Location = new System.Drawing.Point(126, 347);
+            this.labelPrice.Location = new System.Drawing.Point(129, 391);
             this.labelPrice.Name = "labelPrice";
             this.labelPrice.Size = new System.Drawing.Size(36, 13);
             this.labelPrice.TabIndex = 25;
@@ -321,10 +265,10 @@
             // labelProcessing
             // 
             this.labelProcessing.AutoSize = true;
-            this.labelProcessing.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelProcessing.Location = new System.Drawing.Point(264, 86);
+            this.labelProcessing.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelProcessing.Location = new System.Drawing.Point(282, 279);
             this.labelProcessing.Name = "labelProcessing";
-            this.labelProcessing.Size = new System.Drawing.Size(539, 44);
+            this.labelProcessing.Size = new System.Drawing.Size(481, 39);
             this.labelProcessing.TabIndex = 26;
             this.labelProcessing.Text = "Ваш заказ обрабатывается...";
             this.labelProcessing.Visible = false;
@@ -338,7 +282,7 @@
             // labelDriverName
             // 
             this.labelDriverName.AutoSize = true;
-            this.labelDriverName.Location = new System.Drawing.Point(271, 171);
+            this.labelDriverName.Location = new System.Drawing.Point(569, 125);
             this.labelDriverName.Name = "labelDriverName";
             this.labelDriverName.Size = new System.Drawing.Size(81, 13);
             this.labelDriverName.TabIndex = 27;
@@ -348,7 +292,7 @@
             // labelDriverPhone
             // 
             this.labelDriverPhone.AutoSize = true;
-            this.labelDriverPhone.Location = new System.Drawing.Point(271, 193);
+            this.labelDriverPhone.Location = new System.Drawing.Point(569, 147);
             this.labelDriverPhone.Name = "labelDriverPhone";
             this.labelDriverPhone.Size = new System.Drawing.Size(108, 13);
             this.labelDriverPhone.TabIndex = 28;
@@ -358,7 +302,7 @@
             // labelOperatorPhone
             // 
             this.labelOperatorPhone.AutoSize = true;
-            this.labelOperatorPhone.Location = new System.Drawing.Point(271, 149);
+            this.labelOperatorPhone.Location = new System.Drawing.Point(569, 103);
             this.labelOperatorPhone.Name = "labelOperatorPhone";
             this.labelOperatorPhone.Size = new System.Drawing.Size(114, 13);
             this.labelOperatorPhone.TabIndex = 29;
@@ -367,7 +311,7 @@
             // 
             // buttonAbort
             // 
-            this.buttonAbort.Location = new System.Drawing.Point(12, 400);
+            this.buttonAbort.Location = new System.Drawing.Point(15, 444);
             this.buttonAbort.Name = "buttonAbort";
             this.buttonAbort.Size = new System.Drawing.Size(100, 47);
             this.buttonAbort.TabIndex = 30;
@@ -378,24 +322,22 @@
             // 
             // buttonMapFrom
             // 
-            this.buttonMapFrom.Location = new System.Drawing.Point(192, 95);
+            this.buttonMapFrom.Location = new System.Drawing.Point(425, 95);
             this.buttonMapFrom.Name = "buttonMapFrom";
             this.buttonMapFrom.Size = new System.Drawing.Size(66, 35);
             this.buttonMapFrom.TabIndex = 32;
             this.buttonMapFrom.Text = "Указать на карте";
             this.buttonMapFrom.UseVisualStyleBackColor = true;
-            this.buttonMapFrom.Visible = false;
             this.buttonMapFrom.Click += new System.EventHandler(this.buttonMapFrom_Click);
             // 
             // buttonMapTo
             // 
-            this.buttonMapTo.Location = new System.Drawing.Point(192, 149);
+            this.buttonMapTo.Location = new System.Drawing.Point(425, 169);
             this.buttonMapTo.Name = "buttonMapTo";
             this.buttonMapTo.Size = new System.Drawing.Size(66, 35);
             this.buttonMapTo.TabIndex = 33;
             this.buttonMapTo.Text = "Указать на карте";
             this.buttonMapTo.UseVisualStyleBackColor = true;
-            this.buttonMapTo.Visible = false;
             this.buttonMapTo.Click += new System.EventHandler(this.buttonMapTo_Click);
             // 
             // pictureBoxYandexMap
@@ -451,8 +393,6 @@
             this.Controls.Add(this.OrderButton);
             this.Controls.Add(this.Extralabel);
             this.Controls.Add(this.ExtracheckedListBox);
-            this.Controls.Add(this.buttonToAddress);
-            this.Controls.Add(this.buttonToCoord);
             this.Controls.Add(this.ToAddressLabel);
             this.Controls.Add(this.ToAddressBox);
             this.Controls.Add(this.textBoxToY);
@@ -471,8 +411,6 @@
             this.Controls.Add(this.labelPhone);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.NameBox);
-            this.Controls.Add(this.buttonFromCoord);
-            this.Controls.Add(this.buttonFromAddress);
             this.Name = "DesktopForm";
             this.Text = "DesktopClient";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -492,10 +430,6 @@
         private System.Windows.Forms.TextBox PhoneBox;
         private System.Windows.Forms.Label labelFrom;
         private System.Windows.Forms.Label labelTo;
-        private System.Windows.Forms.Button buttonFromAddress;
-        private System.Windows.Forms.Button buttonFromCoord;
-        private System.Windows.Forms.Button buttonToAddress;
-        private System.Windows.Forms.Button buttonToCoord;
         private System.Windows.Forms.TextBox FromAddressBox;
         private System.Windows.Forms.Label FromAddressLabel;
         private System.Windows.Forms.Label labelFromX;
