@@ -17,7 +17,7 @@ namespace TaxiDesktopClient
         public string orderStartGeographicalLongitude { get; set; }
         public string orderFinishGeographicalLatitude { get; set; }
         public string orderFinishGeographicalLongitude { get; set; }
-        public List<string> orderExtraProperty { get; set; }
+        public List<int> orderExtraProperty { get; set; }
         public decimal costOfOrder { get; set; }
         public string DriverName { get; set; }
         public string DriverPhone { get; set; }
@@ -25,7 +25,7 @@ namespace TaxiDesktopClient
         public string DriverPosition {get; set;}
 
         public Order(string customerName = "", string customerPhone = "", string orderStartAddress="", string orderStartGeographicalLatitude = "", string orderStartGeographicalLongitude = "",
-            string orderFinishAddress="", string orderFinishGeographicalLatitude = "", string orderFinishGeographicalLongitude = "", List<string> orderExtraProperty = null)
+            string orderFinishAddress="", string orderFinishGeographicalLatitude = "", string orderFinishGeographicalLongitude = "", List<int> orderExtraProperty = null)
         {     
             this.customerName = customerName;
             this.customerPhone = customerPhone;
