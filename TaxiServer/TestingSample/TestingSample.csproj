@@ -37,6 +37,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Properties\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,8 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\CONST.cs" />
+    <Compile Include="Base\DBLoader.cs" />
+    <Compile Include="Controller\DriverManagerCtrl.cs" />
+    <Compile Include="Controller\MapHelper.cs" />
     <Compile Include="Controller\OrderCreationCtrl.cs" />
     <Compile Include="Controller\OrderManagerCtrl.cs" />
+    <Compile Include="Model\DriverInstanceModel.cs" />
     <Compile Include="Model\OrderInstanceModel.cs" />
     <Compile Include="Base\OrderPoolModel.cs" />
     <Compile Include="_Remote\ITaxiService.cs" />

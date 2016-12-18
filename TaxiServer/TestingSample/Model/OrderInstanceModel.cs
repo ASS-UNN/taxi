@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TestingSample.Base;
 
 namespace TestingSample.Model
 {
@@ -10,16 +11,15 @@ namespace TestingSample.Model
         public int orderID { get; private set; }
         public string name { get; private set; }
         public string phone { get; private set; }
-        public string lonA { get; private set; }
-        public string latA { get; private set; }
-        public string lonZ { get; private set; }
-        public string latZ { get; private set; }
-        public string locA { get; private set; }
-        public string locZ { get; private set; }
-        public List<String> options { get; private set; }
+        public double lonA { get; private set; }
+        public double latA { get; private set; }
+        public double lonZ { get; private set; }
+        public double latZ { get; private set; }
+        public int status { get; private set; }
+        public List<int> options { get; private set; }
 
-        public OrderInstanceModel(string name, string phone, string lonA, string latA, string lonZ, string latZ,
-            string locA, string locZ, List<string> options)
+        public OrderInstanceModel(string name, string phone, double lonA, double latA, double lonZ, double latZ,
+            List<int> options)
         {
             this.name = name;
             this.phone = phone;
@@ -27,11 +27,21 @@ namespace TestingSample.Model
             this.lonZ = lonZ;
             this.latA = latA;
             this.latZ = latZ;
-            this.locA = locA;
-            this.locZ = locZ;
             this.options = options;
-            OrderPoolModel orders = OrderPoolModel.GetInstance();
-            orderID = orders.GenerateOrderID(this);
+        }
+
+        public Dictionary<String, String> Context()
+        {
+            return new Dictionary<String, String>()
+            {
+                {CONST.CUST_NAME, name},
+                {CONST.PHONE,     phone},
+                {CONST.COORD1,    Convert.ToString(lonA)},
+                {CONST.COORD2,    Convert.ToString(latA)},
+                {CONST.COORD3,    Convert.ToString(lonZ)},
+                {CONST.COORD4,    Convert.ToString(latZ)},
+                {CONST.STATUS,    status.ToString()}
+            };
         }
 
         public decimal CalculatePrice()
@@ -45,25 +55,36 @@ namespace TestingSample.Model
             return "+79114229617";
         }
 
-        public int Status()
+        public void SetStatus(int st)
         {
-            return 1;
+            status = st;
         }
 
-        internal string DriverPhone()
+        public void ForceSetOrderID(int _id)
         {
-            return "+790248817612";
+            orderID = _id;
         }
 
-        internal string DriverName()
+        public string DriverPhone()
         {
-            return "Агазимов Айзегин Асагисянович";
+            return (string)OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.PHONE, orderID);
         }
 
-        internal Tuple<float, float> DriverPosition()
+        public string DriverName()
         {
-            Random rnd = new Random();
-            return new Tuple<float, float>((float)rnd.NextDouble() * 300.0f, (float)rnd.NextDouble() * 300.0f);
+            return (string)OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.DRIVER_NAME, orderID);
+        }
+
+        public Tuple<double, double> DriverPosition()
+        {
+            Object coord1 = OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.COORD1, orderID);
+            Object coord2 = OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.COORD2, orderID);
+            return new Tuple<double, double>((double)coord1, (double)coord2);
+        }
+
+        internal int GetStatus()
+        {
+            return OrderPoolModel.GetInstance().GetOrderStatus(orderID);
         }
     }
 }

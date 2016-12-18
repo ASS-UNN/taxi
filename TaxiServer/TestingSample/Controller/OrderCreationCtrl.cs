@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using TestingSample.Model;
+using TestingSample.Base;
 
 namespace TestingSample.Controller
 {
@@ -15,7 +16,7 @@ namespace TestingSample.Controller
         public static string INVALID_NAME = null;
         public static string INVALID_PHONE = null;
         public static string INVALID_COORD = null;
-        public static List<string> INVALID_OPTIONS = null;
+        public static List<int> INVALID_OPTIONS = null;
 
         public static string ValidateName(string name)
         {
@@ -68,7 +69,7 @@ namespace TestingSample.Controller
             return coord;
         }
 
-        public static List<string> ValidateExtraOptions(List<string> options)
+        public static List<int> ValidateExtraOptions(List<int> options)
         {
             if (options == null)
                 return INVALID_OPTIONS;
@@ -76,10 +77,12 @@ namespace TestingSample.Controller
             return options;
         }
 
-        public static int CreateOrder(string name, string phone, string lonA, string latA, string lonZ, string latZ,
-            string locA, string locZ, List<string> options)
+        public static int CreateOrder(string name, string phone, double lonA, double latA, double lonZ, double latZ,
+            List<int> options)
         {
-            OrderInstanceModel order = new OrderInstanceModel(name, phone, lonA, latA, lonZ, latZ, locA, locZ, options);
+            OrderInstanceModel order = new OrderInstanceModel(name, phone, lonA, latA, lonZ, latZ, options);
+            order.SetStatus(CONST.ORDER_STATUS_PENDING);
+            order.ForceSetOrderID(OrderPoolModel.GetInstance().CreateOrder(order)); //order stored into DB
             return order.orderID;
         }
     }

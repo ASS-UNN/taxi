@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TestingSample.Model;
+using TestingSample.Base;
 
 namespace TestingSample.Controller
 {
@@ -29,7 +30,7 @@ namespace TestingSample.Controller
 
         public int GetStatus()
         {
-            return model.Status();
+            return model.GetStatus();
         }
 
         public string GetDriverPhone()
@@ -42,14 +43,20 @@ namespace TestingSample.Controller
             return model.DriverName();
         }
 
-        public Tuple<float, float> GetDriverPosition()
+        public Tuple<double, double> GetDriverPosition()
         {
             return model.DriverPosition();
         }
 
         public void AbortOrder()
         {
-            OrderPoolModel.GetInstance().RemoveOrder(model);
+            OrderPoolModel.GetInstance().UpdateOrderStatus(model.orderID, CONST.ORDER_STATUS_ABORTED);
+        }
+
+        public static decimal GetPriceByAddress(double lonA, double latA, double lonZ, double latZ)
+        {
+            Random rnd = new Random();
+            return (decimal)(Math.Abs((lonA + 1) * (latA + 1) * (lonZ + 1) * (latZ + 1)) * rnd.NextDouble() * 100);
         }
     }
 }
