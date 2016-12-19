@@ -17,7 +17,7 @@ namespace TestingSample.Base
                 return instance;
         }
 
-        private static string DB_NAME = "Base\\db.sqlite";
+        private static string DB_NAME = "../../Base/db.sqlite";
         private SQLiteConnection connection;        
 
         private DBLoader()
@@ -41,7 +41,10 @@ namespace TestingSample.Base
         {
             SQLiteCommand command = new SQLiteCommand(query, connection);
             command.ExecuteNonQuery();
-            return (int)connection.LastInsertRowId;
+            query = "select seq from sqlite_sequence where name='orders'";
+            SQLiteDataReader reader = ExecuteSelect(query);
+            int key = Convert.ToInt32(reader["seq"]);
+            return key;
         }
 
         public SQLiteDataReader ExecuteSelect(String query)

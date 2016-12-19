@@ -22,7 +22,7 @@ namespace TestingSample.Base
         public const String LOGIN =        "login";
         public const String PASSWORD =     "password";
         public const String PHONE =        "phone";
-        public const String CURRENT_ORDER ="currentorder";
+        public const String CURRENT_ORDER ="current_order";
         public const String RATING =       "rating";
         public const String TEXT =         "text";
 
@@ -44,7 +44,5 @@ namespace TestingSample.Base
         public const int DRIVER_STATUS_UNAVAILABLE = 0;
         public const int DRIVER_STATUS_IDLE = 1;
         public const int DRIVER_STATUS_ATTENDING = 2;
-
-        public const double POSITION_EPSILON = 1E-10;
     }
 }

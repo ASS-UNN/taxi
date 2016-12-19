@@ -74,10 +74,14 @@ namespace TestingSample.Controller
             if (options == null)
                 return INVALID_OPTIONS;
 
+            foreach (int id in options)
+                if (id > CONST.OPT_FEMALE_DRIVER || id < 1)
+                    return INVALID_OPTIONS;
+
             return options;
         }
 
-        public static int CreateOrder(string name, string phone, double lonA, double latA, double lonZ, double latZ,
+        public static int CreateOrder(string name, string phone, string lonA, string latA, string lonZ, string latZ,
             List<int> options)
         {
             OrderInstanceModel order = new OrderInstanceModel(name, phone, lonA, latA, lonZ, latZ, options);

@@ -17,7 +17,10 @@ namespace TestingSample.Controller
             {
                 return -1;
             }
-            return (model = DriverInstanceModel.GetDriverByLogin(login, pwd)).driverID;
+            model = DriverInstanceModel.GetDriverByLogin(login, pwd);
+            if (model == null)
+                return -1;
+            else return model.driverID;
         }
 
         public bool TakeOrder(int orderID)
@@ -34,17 +37,13 @@ namespace TestingSample.Controller
             return OrderPoolModel.GetInstance().CompleteOrder(model.driverID);
         }
 
-        internal void UpdatePosition(double lon, double lat)
+        internal void UpdatePosition(string lon, string lat)
         {
             if (model.driverID > 0)
-                if (Math.Abs(lon - model.coord1) > CONST.POSITION_EPSILON ||
-                    Math.Abs(lat - model.coord2) > CONST.POSITION_EPSILON)
-                {
-                    OrderPoolModel.GetInstance().UpdateDriverPosition(model.driverID, lon, lat);
-                }
+                OrderPoolModel.GetInstance().UpdateDriverPosition(model.driverID, lon, lat);
         }
 
-        internal List<Tuple<int, double, double, double, double>> GetAvailableOrders()
+        internal List<Tuple<int, string, string, string, string>> GetAvailableOrders()
         {
             if (model.driverID < 0)
                 return null;

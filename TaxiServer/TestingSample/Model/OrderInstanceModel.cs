@@ -11,14 +11,14 @@ namespace TestingSample.Model
         public int orderID { get; private set; }
         public string name { get; private set; }
         public string phone { get; private set; }
-        public double lonA { get; private set; }
-        public double latA { get; private set; }
-        public double lonZ { get; private set; }
-        public double latZ { get; private set; }
+        public string lonA { get; private set; }
+        public string latA { get; private set; }
+        public string lonZ { get; private set; }
+        public string latZ { get; private set; }
         public int status { get; private set; }
         public List<int> options { get; private set; }
 
-        public OrderInstanceModel(string name, string phone, double lonA, double latA, double lonZ, double latZ,
+        public OrderInstanceModel(string name, string phone, string lonA, string latA, string lonZ, string latZ,
             List<int> options)
         {
             this.name = name;
@@ -79,7 +79,7 @@ namespace TestingSample.Model
         {
             Object coord1 = OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.COORD1, orderID);
             Object coord2 = OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.COORD2, orderID);
-            return new Tuple<double, double>((double)coord1, (double)coord2);
+            return new Tuple<double, double>(Convert.ToDouble(coord1), Convert.ToDouble(coord2));
         }
 
         internal int GetStatus()

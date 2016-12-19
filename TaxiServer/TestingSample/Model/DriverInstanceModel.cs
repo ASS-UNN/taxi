@@ -12,13 +12,13 @@ namespace TestingSample.Model
         public String name { get; private set; }
         public String login { get; private set; }
         public String password { get; private set; }
-        public double coord1 { get; set; }
-        public double coord2 { get; set; }
+        public string coord1 { get; set; }
+        public string coord2 { get; set; }
         public int status { get; set; }
         public String phone { get; private set; }
         public int rating { get; private set; }
 
-        public DriverInstanceModel(int id, String Name, String Login, String Password, String Phone, double c1, double c2, int Status, int Rating)
+        public DriverInstanceModel(int id, String Name, String Login, String Password, String Phone, string c1, string c2, int Status, int Rating)
         {
             driverID = id;
             name = Name;

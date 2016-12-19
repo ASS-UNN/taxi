@@ -23,6 +23,19 @@ namespace TestingSample.Model
         DBLoader db = DBLoader.GetInstance();
         String query = null;
 
+        private int MaybeInt(Object obj)
+        {
+            if (!obj.Equals(DBNull.Value))
+                return Convert.ToInt32(obj);
+            else return -1;
+        }
+        private String MaybeString(Object obj)
+        {
+            if (!obj.Equals(DBNull.Value))
+                return Convert.ToString(obj);
+            else return "";
+        }
+
         private String FillContext(String contextString, Dictionary<String, String> contextVars)
         {
             foreach (KeyValuePair<String, String> contextVar in contextVars)
@@ -53,7 +66,7 @@ namespace TestingSample.Model
                 orderOptions = db.ExecuteSelect(query);
                 do
                 {
-                    options.Add((int)orderOptions[CONST.OPTION_ID]);
+                    options.Add(MaybeInt(orderOptions[CONST.OPTION_ID]));
                 } while (orderOptions.Read());
             }
             catch (Exception)
@@ -61,21 +74,22 @@ namespace TestingSample.Model
                 options = null;
             }
             model = new OrderInstanceModel(
-                (String)order[CONST.CUST_NAME],
-                (String)order[CONST.PHONE],
-                (double)order[CONST.COORD1],
-                (double)order[CONST.COORD2],
-                (double)order[CONST.COORD3],
-                (double)order[CONST.COORD4],
+                MaybeString(order[CONST.CUST_NAME]),
+                MaybeString(order[CONST.PHONE]),
+                MaybeString(order[CONST.COORD1]),
+                MaybeString(order[CONST.COORD2]),
+                MaybeString(order[CONST.COORD3]),
+                MaybeString(order[CONST.COORD4]),
                 options);
-            model.SetStatus((int)order[CONST.STATUS]);
+            model.SetStatus(MaybeInt(order[CONST.STATUS]));
+            model.ForceSetOrderID(MaybeInt(order[CONST.ORDER_ID]));
             return model;
         }
 
         public int CreateOrder(OrderInstanceModel order)
         {
             query = "INSERT INTO orders (cust_name, phone, coord1, coord2, coord3, coord4, status) VALUES " +
-                "({cust_name}, {phone}, {coord1}, {coord2}, {coord3}, {coord4}, {status});";
+                "('{cust_name}', '{phone}', '{coord1}', '{coord2}', '{coord3}', '{coord4}', {status});";
             var context = order.Context();
             query = FillContext(query, context);
             return db.ExecuteInsert(query);
@@ -83,7 +97,7 @@ namespace TestingSample.Model
 
         public DriverInstanceModel GetDriverByLogin(string username, string pwd)
         {
-            query = "SELECT * FROM drivers WHERE login = {login} AND password = {password};";
+            query = "SELECT * FROM drivers WHERE login = '{login}' AND password = '{password}';";
             query = FillContext(query, new Dictionary<string, string>() { { CONST.LOGIN, username }, {CONST.PASSWORD, pwd} });
             SQLiteDataReader reader = null;
             try
@@ -94,16 +108,15 @@ namespace TestingSample.Model
             {
                 return null;
             }
-
             DriverInstanceModel driver = new DriverInstanceModel(
-                (int)reader[CONST.DRIVER_ID],
-                (String)reader[CONST.DRIVER_NAME], 
+                MaybeInt(reader[CONST.DRIVER_ID]),
+                MaybeString(reader[CONST.DRIVER_NAME]), 
                 username, pwd, 
-                (String)reader[CONST.PHONE],
-                (double)reader[CONST.COORD1], 
-                (double)reader[CONST.COORD2], 
-                (int)reader[CONST.STATUS], 
-                (int)reader[CONST.RATING]);
+                MaybeString(reader[CONST.PHONE] ),
+                MaybeString(reader[CONST.COORD1]), 
+                MaybeString(reader[CONST.COORD2]),
+                MaybeInt(reader[CONST.STATUS]),
+                MaybeInt(reader[CONST.RATING]));
             return driver;
         }
 
@@ -120,7 +133,7 @@ namespace TestingSample.Model
             {                
                 return -1;
             }
-            return (int)reader[CONST.STATUS];
+            return MaybeInt(reader[CONST.STATUS]);
         }
 
         internal bool TieDriverAndOrder(int driverID, int orderID)
@@ -141,7 +154,7 @@ namespace TestingSample.Model
             query = "SELECT current_order FROM drivers WHERE driver_id = {driver_id};";
             query = FillContext(query, new Dictionary<string, string>() { { CONST.DRIVER_ID, driverID.ToString() } });
             SQLiteDataReader reader = db.ExecuteSelect(query);
-            String orderID = (String)reader[CONST.CURRENT_ORDER];
+            String orderID = MaybeString(reader[CONST.CURRENT_ORDER]);
             
             query = "UPDATE drivers SET current_order = NULL, status = {status} WHERE driver_id = {driver_id};";
             query = FillContext(query, new Dictionary<string, string>() { { CONST.DRIVER_ID, driverID.ToString() }, { CONST.STATUS, CONST.DRIVER_STATUS_IDLE.ToString() } });
@@ -153,11 +166,11 @@ namespace TestingSample.Model
             return true;
         }
 
-        internal void UpdateDriverPosition(int driverID, double lon, double lat)
+        internal void UpdateDriverPosition(int driverID, string lon, string lat)
         {
-            query = "UPDATE drivers SET coord1 = {coord1}, coord2 = {coord2} WHERE driver_id = {driver_id};";
+            query = "UPDATE drivers SET coord1 = '{coord1}', coord2 = '{coord2}' WHERE driver_id = {driver_id};";
             query = FillContext(query, new Dictionary<string, string>() { { CONST.DRIVER_ID, driverID.ToString() },
-                {CONST.COORD1, Convert.ToString(lon) }, {CONST.COORD2, Convert.ToString(lat) }});
+                {CONST.COORD1, lon }, {CONST.COORD2, lat }});
             db.ExecuteUpdate(query);
         }
 
@@ -170,20 +183,20 @@ namespace TestingSample.Model
             return reader[datatype];
         }
 
-        internal List<Tuple<int, double, double, double, double>> GetAvailableOrders()
+        internal List<Tuple<int, string, string, string, string>> GetAvailableOrders()
         {
-            var orders = new List<Tuple<int, double, double, double, double>>();
+            var orders = new List<Tuple<int, string, string, string, string>>();
             query = "SELECT order_id, coord1, coord2, coord3, coord4 FROM orders WHERE status = {status};";
             query = FillContext(query, new Dictionary<string, string>() { { CONST.STATUS, CONST.ORDER_STATUS_PENDING.ToString() } });
             SQLiteDataReader reader = db.ExecuteSelect(query);
             do
             {
-                var orderData = new Tuple<int, double, double, double, double>(
-                    (int)reader[CONST.ORDER_ID],
-                    (double)reader[CONST.COORD1],
-                    (double)reader[CONST.COORD2],
-                    (double)reader[CONST.COORD3],
-                    (double)reader[CONST.COORD4]);
+                var orderData = new Tuple<int, string, string, string, string>(
+                    MaybeInt(reader[CONST.ORDER_ID]),
+                    MaybeString(reader[CONST.COORD1]),
+                    MaybeString(reader[CONST.COORD2]),
+                    MaybeString(reader[CONST.COORD3]),
+                    MaybeString(reader[CONST.COORD4]));
                 orders.Add(orderData);
             } while (reader.Read());
             return orders;

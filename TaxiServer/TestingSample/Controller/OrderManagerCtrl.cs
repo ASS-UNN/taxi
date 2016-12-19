@@ -53,10 +53,10 @@ namespace TestingSample.Controller
             OrderPoolModel.GetInstance().UpdateOrderStatus(model.orderID, CONST.ORDER_STATUS_ABORTED);
         }
 
-        public static decimal GetPriceByAddress(double lonA, double latA, double lonZ, double latZ)
+        public static decimal GetPriceByAddress(string lonA, string latA, string lonZ, string latZ)
         {
             Random rnd = new Random();
-            return (decimal)(Math.Abs((lonA + 1) * (latA + 1) * (lonZ + 1) * (latZ + 1)) * rnd.NextDouble() * 100);
+            return (decimal)(Math.Abs((lonA.Length + 1) * (latA.Length + 1) * (lonZ.Length + 1) * (latZ.Length + 1)) * rnd.NextDouble() * 100);
         }
     }
 }

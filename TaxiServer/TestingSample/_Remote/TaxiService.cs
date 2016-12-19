@@ -19,7 +19,7 @@ namespace TestingSample
         OrderManagerCtrl orderManager = null;
         DriverManagerCtrl driverManager = null;
 
-        public int CreateOrder(string Name, string Phone, double StartGeographicalLatitude, double StartGeographicalLongitude, double FinishGeographicalLatitude, double FinishGeographicalLongitude, List<int> Extra)
+        public int CreateOrder(string Name, string Phone, string StartGeographicalLatitude, string StartGeographicalLongitude, string FinishGeographicalLatitude, string FinishGeographicalLongitude, List<int> Extra)
         {
             string name = OrderCreationCtrl.ValidateName(Name);
             string phone = OrderCreationCtrl.ValidatePhoneNumber(Phone);
@@ -36,14 +36,14 @@ namespace TestingSample
             return serviceID;
         }
 
-        public decimal GetPrice(int OrderID)
+        public decimal GetPrice()
         {
             if (orderManager == null)
-                throw new Exception("Trying to get price for non-existent order");
+                return -1;
             return orderManager.GetPrice();
         }
 
-        public decimal GetPriceByCoords(double lonA, double latA, double lonZ, double latZ)
+        public decimal GetPriceByCoords(string lonA, string latA, string lonZ, string latZ)
         {
             return OrderManagerCtrl.GetPriceByAddress(lonA, latA, lonZ, latZ);
         }
@@ -51,42 +51,42 @@ namespace TestingSample
         public string GetOperatorPhone()
         {
             if (orderManager == null)
-                throw new Exception("Trying to get operator phone number from non-existent order");
+                return null;
             return orderManager.GetOperatorPhone();
         }
 
-        public int GetOrderStatus(int OrderID)
+        public int GetOrderStatus()
         {
             if (orderManager == null)
-                throw new Exception("Trying to get order status for non-existent order");
+                return -1;
             return orderManager.GetStatus();
         }
 
-        public string GetDriverPhone(int OrderID)
+        public string GetDriverPhone()
         {
             if (orderManager == null)
-                throw new Exception("Trying to get driver phone number from non-existent order");
+                return null;
             return orderManager.GetDriverPhone();
         }
 
-        public string GetDriverName(int OrderID)
+        public string GetDriverName()
         {
             if (orderManager == null)
-                throw new Exception("Trying to get driver name from non-existent order");
+                return null;
             return orderManager.GetDriverName();
         }
 
-        public Tuple<double, double> GetDriverPosition(int OrderID)
+        public Tuple<double, double> GetDriverPosition()
         {
             if (orderManager == null)
-                throw new Exception("Trying to get driver position from non-existent order");
+                return null;
             return orderManager.GetDriverPosition();
         }
 
-        public void AbortOrder(int OrderID)
+        public void AbortOrder()
         {
             if (orderManager == null)
-                throw new Exception("Trying to abort non-existent order");
+                return;
             orderManager.AbortOrder();
             orderManager = null;
         }
@@ -106,20 +106,20 @@ namespace TestingSample
             return driverManager.TakeOrder(orderID);
         }
 
-        public bool MarkOrderComplete(int orderID)
+        public bool MarkOrderComplete()
         {
             if (driverManager == null)
                 return false;
             return driverManager.CompleteOrder();
         }
 
-        public void UpdateDriverPosition(double lon, double lat)
+        public void UpdateDriverPosition(string lon, string lat)
         {
             if (driverManager == null)
                 return;
             driverManager.UpdatePosition(lon, lat);
         }
-        public List<Tuple<int, double, double, double, double>> GetAvailableOrders()
+        public List<Tuple<int, string, string, string, string>> GetAvailableOrders()
         {
             if (driverManager == null)
                 return null;

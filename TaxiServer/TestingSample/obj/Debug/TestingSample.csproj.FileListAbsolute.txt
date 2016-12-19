@@ -1,0 +1,8 @@
+W:\STUDY\repository\taxi\TaxiServer\TestingSample\bin\Debug\TestingSample.exe
+W:\STUDY\repository\taxi\TaxiServer\TestingSample\bin\Debug\TestingSample.pdb
+W:\STUDY\repository\taxi\TaxiServer\TestingSample\bin\Debug\Scs.dll
+W:\STUDY\repository\taxi\TaxiServer\TestingSample\bin\Debug\System.Data.SQLite.dll
+W:\STUDY\repository\taxi\TaxiServer\TestingSample\bin\Debug\System.Data.SQLite.xml
+W:\STUDY\repository\taxi\TaxiServer\TestingSample\obj\Debug\TestingSample.exe
+W:\STUDY\repository\taxi\TaxiServer\TestingSample\obj\Debug\TestingSample.pdb
+W:\STUDY\repository\taxi\TaxiServer\TestingSample\obj\Debug\TestingSample.csprojResolveAssemblyReference.cache
