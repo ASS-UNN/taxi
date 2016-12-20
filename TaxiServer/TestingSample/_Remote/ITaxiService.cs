@@ -21,5 +21,7 @@ namespace TestingSample
         bool MarkOrderComplete();
         int LogDriverIn(String login, String password);
         List<Tuple<int, string, string, string, string>> GetAvailableOrders();
+        int GetDriverRating();
+        int UpdateDriverRating(int amount);
     }
 }

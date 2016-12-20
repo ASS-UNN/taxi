@@ -86,5 +86,20 @@ namespace TestingSample.Model
         {
             return OrderPoolModel.GetInstance().GetOrderStatus(orderID);
         }
+
+        internal int GetDriverRating()
+        {
+            return Convert.ToInt32(OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.RATING, orderID));
+        }
+
+        internal int DecreaseDriverRating()
+        {
+            return OrderPoolModel.GetInstance().DecreaseDriverStatus(orderID);
+        }
+
+        internal int IncreaseDriverRating()
+        {
+            return OrderPoolModel.GetInstance().IncreaseDriverStatus(orderID);
+        }
     }
 }

@@ -58,5 +58,20 @@ namespace TestingSample.Controller
             Random rnd = new Random();
             return (decimal)(Math.Abs((lonA.Length + 1) * (latA.Length + 1) * (lonZ.Length + 1) * (latZ.Length + 1)) * rnd.NextDouble() * 100);
         }
+
+        internal int GetDriverRating()
+        {
+            return model.GetDriverRating();
+        }
+
+        internal int UpdateDriverRating(int amount)
+        {
+            if (amount == 0)
+                return -1;
+            if (amount < 0)
+                return model.DecreaseDriverRating();
+            else
+                return model.IncreaseDriverRating();
+        }
     }
 }

@@ -125,5 +125,17 @@ namespace TestingSample
                 return null;
             return driverManager.GetAvailableOrders();
         }
+        public int GetDriverRating()
+        {
+            if (orderManager == null)
+                return -1;
+            return orderManager.GetDriverRating();
+        }
+        public int UpdateDriverRating(int amount)
+        {
+            if (orderManager == null)
+                return -1;
+            return orderManager.UpdateDriverRating(amount);
+        }
     }
 }

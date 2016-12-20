@@ -201,5 +201,29 @@ namespace TestingSample.Model
             } while (reader.Read());
             return orders;
         }
+
+        internal int DecreaseDriverStatus(int orderID)
+        {
+            Object currentRating = GetDriverDataFromOrder(CONST.RATING, orderID);
+            int rating = Convert.ToInt32(currentRating);
+            if (rating < 1) return -1;
+            rating--;
+            int driverID = Convert.ToInt32(OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.DRIVER_ID, orderID));
+            query = "UPDATE drivers SET rating = {rating} WHERE driver_id = {driver_id};";
+            query = FillContext(query, new Dictionary<string, string>() { { CONST.RATING, rating.ToString() }, { CONST.DRIVER_ID, driverID.ToString() } });
+            db.ExecuteUpdate(query);
+            return rating;
+        }
+        internal int IncreaseDriverStatus(int orderID)
+        {
+            Object currentRating = GetDriverDataFromOrder(CONST.RATING, orderID);
+            int rating = Convert.ToInt32(currentRating);
+            rating++;
+            int driverID = Convert.ToInt32(OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.DRIVER_ID, orderID));
+            query = "UPDATE drivers SET rating = {rating} WHERE driver_id = {driver_id};";
+            query = FillContext(query, new Dictionary<string, string>() { { CONST.RATING, rating.ToString() }, { CONST.DRIVER_ID, driverID.ToString() } });
+            db.ExecuteUpdate(query);
+            return rating;
+        }
     }
 }
