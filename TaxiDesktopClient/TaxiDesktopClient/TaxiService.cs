@@ -8,12 +8,13 @@ namespace TaxiDesktopClient
     public interface ITaxiService
     {
         int CreateOrder(string Name, string Phone, string StartGeographicalLatitude, string StartGeographicalLongitude, string FinishGeographicalLatitude, string FinishGeographicalLongitude, List<int> Extra);
-        decimal GetPrice(string StartGeographicalLatitude, string StartGeographicalLongitude, string FinishGeographicalLatitude, string FinishGeographicalLongitude);
+        decimal GetPrice();
+        decimal GetPriceByCoords(string lonA, string latA, string lonZ, string latZ);
         string GetOperatorPhone();
-        int GetOrderStatus(int OrderID);
-        string GetDriverPhone(int OrderID);
-        string GetDriverName(int OrderID);
-        Tuple<double,double> GetDriverPosition(int OrderID);
-        void AbortOrder(int OrderID);
+        int GetOrderStatus();
+        string GetDriverPhone();
+        string GetDriverName();
+        Tuple<double,double> GetDriverPosition();
+        void AbortOrder();
     }
 }

@@ -20,9 +20,9 @@ namespace TaxiDesktopClient
         int Phase = 0;
         string Search;
         //int Port = 10083;
-        string IP = "127.0.0.1";
+        //string IP = "127.0.0.1";
         int Port = 4040;        
-        //string IP = "95.79.210.235";
+        string IP = "95.79.210.235";
         bool TextChange = false;
         Tuple<double, double> MapCenter = new Tuple<double,double>(56.299520, 43.982913);
         Tuple<double, double> MapMoveStart;
@@ -142,6 +142,7 @@ namespace TaxiDesktopClient
                     labelDriverPhone.Text = "Связь с водителем: " + DesktopClient.GetDriverPhone();
                     labelDriverName.Visible = true;
                     labelDriverPhone.Visible = true;
+                    buttonAbort.Visible = false;
                 }
             }
             if (Phase==2)
@@ -156,9 +157,10 @@ namespace TaxiDesktopClient
                 if (textBoxFromX.Text != "" && textBoxFromY.Text != "" && textBoxToX.Text != "" && textBoxToY.Text != "")
                 {
                     decimal Tmp = DesktopClient.GetPrice(textBoxFromX.Text, textBoxFromY.Text,textBoxToX.Text, textBoxToY.Text);
+                    string PriceS = Tmp.ToString("#.##");
                     if (Tmp != (-1))
                     {
-                        labelPrice.Text = "Цена: " + DesktopClient.GetPrice(textBoxFromX.Text, textBoxFromY.Text, textBoxToX.Text, textBoxToY.Text) + " руб.";
+                        labelPrice.Text = "Цена: " + PriceS + " руб.";
                     }
                     else
                     {
