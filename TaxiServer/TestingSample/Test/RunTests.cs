@@ -9,7 +9,7 @@ namespace TestingSample.Test
     {
         static void Main(string[] args)
         {
-            DriverBehaviourTester test1 = new DriverBehaviourTester();
+            //DriverBehaviourTester test1 = new DriverBehaviourTester();
             CustomerBehaviourTest test2 = new CustomerBehaviourTest();
         }
     }

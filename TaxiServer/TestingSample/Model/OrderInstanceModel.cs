@@ -79,7 +79,9 @@ namespace TestingSample.Model
         {
             Object coord1 = OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.COORD1, orderID);
             Object coord2 = OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.COORD2, orderID);
-            return new Tuple<double, double>(Convert.ToDouble(coord1), Convert.ToDouble(coord2));
+            String c1 = ((string)coord1).Replace('.', ',');
+            String c2 = ((string)coord2).Replace('.', ',');
+            return new Tuple<double, double>(Convert.ToDouble(c1), Convert.ToDouble(c2));
         }
 
         internal int GetStatus()

@@ -53,6 +53,13 @@ namespace TestingSample.Test
             string phone = service.GetDriverPhone();
             Debug.Assert(name != null && !name.Equals(""), "Invalid driver name acquired");
             Debug.Assert(phone != null && !phone.Equals(""), "Invalid driver phone acquired");
+            Tuple<double, double> coords = service.GetDriverPosition();
+            Console.WriteLine(coords.Item1);
+            Console.WriteLine(coords.Item2);
+            DBLoader.GetInstance().ExecuteUpdate("UPDATE drivers SET coord1 = '00.000000', coord2 = '17.000123' WHERE login = 'lex';");
+            coords = service.GetDriverPosition();
+            Console.WriteLine(coords.Item1);
+            Console.WriteLine(coords.Item2);
         }
 
         void Creation1()
