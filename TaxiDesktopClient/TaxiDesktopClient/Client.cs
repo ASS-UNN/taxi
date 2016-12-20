@@ -35,6 +35,14 @@ namespace TaxiDesktopClient
             return true;
         }
 
+        public void Close()
+        {
+            if (clientService!=null)
+            {
+                clientService.Dispose();
+            }
+        }
+
         public bool CreateOrder(string customerName = "", string customerPhone = "", string orderStartAddress = "", string orderStartGeographicalLatitude = "", string orderStartGeographicalLongitude = "",string orderFinishAddress = "", string orderFinishGeographicalLatitude = "", string orderFinishGeographicalLongitude = "", List<int> orderExtraProperty = null)
         {
             int ID = clientService.ServiceProxy.CreateOrder(customerName, customerPhone, orderStartGeographicalLatitude, orderStartGeographicalLongitude, orderFinishGeographicalLatitude, orderFinishGeographicalLongitude, orderExtraProperty);
@@ -103,7 +111,8 @@ namespace TaxiDesktopClient
             YandexAPI.Maps.GeoCode geoCode = new GeoCode();
             if (clientOrder.orderStartGeographicalLatitude != "" && clientOrder.orderStartGeographicalLongitude != "")
             {
-                return (clientOrder.orderStartGeographicalLatitude + "," + clientOrder.orderStartGeographicalLongitude);
+                //return (clientOrder.orderStartGeographicalLatitude + "," + clientOrder.orderStartGeographicalLongitude);
+                return (clientOrder.orderStartGeographicalLongitude + "," + clientOrder.orderStartGeographicalLatitude);
             }
             if (clientOrder.orderStartAddress != "")
             {
@@ -117,7 +126,8 @@ namespace TaxiDesktopClient
             YandexAPI.Maps.GeoCode geoCode = new GeoCode();
             if (clientOrder.orderFinishGeographicalLatitude != "" && clientOrder.orderFinishGeographicalLongitude != "")
             {
-                return (clientOrder.orderFinishGeographicalLatitude + "," + clientOrder.orderFinishGeographicalLongitude);
+                //return (clientOrder.orderFinishGeographicalLatitude + "," + clientOrder.orderFinishGeographicalLongitude);
+                return (clientOrder.orderFinishGeographicalLongitude + "," + clientOrder.orderFinishGeographicalLatitude);
             }
             if (clientOrder.orderFinishAddress != "")
             {

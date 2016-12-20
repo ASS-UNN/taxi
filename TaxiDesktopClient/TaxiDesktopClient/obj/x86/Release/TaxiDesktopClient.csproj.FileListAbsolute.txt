@@ -143,3 +143,4 @@ D:\My_programs\Taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesk
 D:\My_programs\Taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.csproj.GenerateResource.Cache
 D:\My_programs\Taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.exe
 D:\My_programs\Taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.pdb
+D:\My_programs\Taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.csprojResolveAssemblyReference.cache

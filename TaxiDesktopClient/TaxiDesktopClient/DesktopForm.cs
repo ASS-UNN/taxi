@@ -22,7 +22,8 @@ namespace TaxiDesktopClient
         //int Port = 10083;
         //string IP = "127.0.0.1";
         int Port = 4040;        
-        string IP = "95.79.210.235";
+        //string IP = "95.79.210.235";
+        string IP = "95.79.252.13";
         bool TextChange = false;
         Tuple<double, double> MapCenter = new Tuple<double,double>(56.299520, 43.982913);
         Tuple<double, double> MapMoveStart;
@@ -100,12 +101,15 @@ namespace TaxiDesktopClient
             {
                 Extra.Add(s+1);
             }
-            if (!DesktopClient.CreateOrder(NameBox.Text, PhoneBox.Text, FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text, Extra))
+            //if (!DesktopClient.CreateOrder(NameBox.Text, PhoneBox.Text, FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text, Extra))
+            if (!DesktopClient.CreateOrder(NameBox.Text, PhoneBox.Text, FromAddressBox.Text, textBoxFromY.Text, textBoxFromX.Text, ToAddressBox.Text, textBoxToY.Text, textBoxToX.Text, Extra))
             {
                 MessageBox.Show("Введены некорректные данные");
             }          
             else
             {
+                Start = new Tuple<double, double>(System.Convert.ToDouble(textBoxFromX.Text, CultureInfo.InvariantCulture), System.Convert.ToDouble(textBoxFromY.Text, CultureInfo.InvariantCulture));
+                Finish = new Tuple<double, double>(System.Convert.ToDouble(textBoxToX.Text, CultureInfo.InvariantCulture), System.Convert.ToDouble(textBoxToY.Text, CultureInfo.InvariantCulture));
                 OrderButton.Visible = false;
                 labelPrice.Visible = true;
                 labelProcessing.Visible = true;
@@ -425,6 +429,15 @@ namespace TaxiDesktopClient
                 textBoxToX.Text = "";
                 textBoxToY.Text = "";
             }
+        }
+
+        private void CloseDesktop(object sender, FormClosedEventArgs e)
+        {
+            if (Phase == 2)
+            {
+                DesktopClient.AbortOrder();
+            }
+            DesktopClient.Close();
         }
     }
 }
