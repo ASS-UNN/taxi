@@ -146,6 +146,10 @@ namespace TestingSample.Model
             query = FillContext(query, new Dictionary<string, string>() 
                 { { CONST.DRIVER_ID, driverID.ToString()}, {CONST.CURRENT_ORDER, orderID.ToString()}, {CONST.STATUS, CONST.DRIVER_STATUS_ATTENDING.ToString()} });
             db.ExecuteUpdate(query);
+
+            query = "UPDATE orders SET status = {status} WHERE order_id = {order_id};";
+            query = FillContext(query, new Dictionary<string, string>() { { CONST.ORDER_ID, orderID.ToString() }, { CONST.STATUS, CONST.ORDER_STATUS_ATTENDED.ToString() } });
+            db.ExecuteUpdate(query);
             return true;
         }
 
