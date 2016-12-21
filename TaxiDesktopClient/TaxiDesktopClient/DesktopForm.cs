@@ -431,11 +431,20 @@ namespace TaxiDesktopClient
             }
         }
 
-        private void CloseDesktop(object sender, FormClosedEventArgs e)
+        private void ClosingDesktop(object sender, FormClosingEventArgs e)
         {
-            if (Phase == 2)
+            if (Phase == 1)
             {
-                DesktopClient.AbortOrder();
+                DialogResult Confirmation = MessageBox.Show("Отменить заказ?", "Выход", MessageBoxButtons.YesNoCancel);
+                if (Confirmation == System.Windows.Forms.DialogResult.Yes)
+                {
+                    DesktopClient.AbortOrder();
+                }
+                else if (Confirmation == System.Windows.Forms.DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
             }
             DesktopClient.Close();
         }
