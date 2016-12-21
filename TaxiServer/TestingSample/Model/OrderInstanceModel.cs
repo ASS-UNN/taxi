@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using TestingSample.Base;
@@ -79,9 +80,9 @@ namespace TestingSample.Model
         {
             Object coord1 = OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.COORD1, orderID);
             Object coord2 = OrderPoolModel.GetInstance().GetDriverDataFromOrder(CONST.COORD2, orderID);
-            String c1 = ((string)coord1).Replace('.', ',');
-            String c2 = ((string)coord2).Replace('.', ',');
-            return new Tuple<double, double>(Convert.ToDouble(c1), Convert.ToDouble(c2));
+            double c1 = Convert.ToDouble(coord1, CultureInfo.InvariantCulture);
+            double c2 = Convert.ToDouble(coord2, CultureInfo.InvariantCulture);
+            return new Tuple<double, double>(c1, c2);
         }
 
         internal int GetStatus()
