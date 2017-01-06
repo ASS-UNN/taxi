@@ -144,3 +144,13 @@ D:\My_programs\Taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesk
 D:\My_programs\Taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.csproj.GenerateResource.Cache
 D:\My_programs\Taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.exe
 D:\My_programs\Taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.pdb
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.exe
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.pdb
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\bin\Release\TaxiDesktopClient.exe
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\bin\Release\TaxiDesktopClient.pdb
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\bin\Release\Scs.dll
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\bin\Release\YandexAPI.dll
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.csprojResolveAssemblyReference.cache
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.DesktopForm.resources
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.Properties.Resources.resources
+W:\STUDY\repository\taxi\TaxiDesktopClient\TaxiDesktopClient\obj\x86\Release\TaxiDesktopClient.csproj.GenerateResource.Cache

@@ -14,7 +14,14 @@ namespace TaxiDesktopClient
         int GetOrderStatus();
         string GetDriverPhone();
         string GetDriverName();
-        Tuple<double,double> GetDriverPosition();
+        Tuple<double, double> GetDriverPosition();
+        void UpdateDriverPosition(string lon, string lat);
         void AbortOrder();
+        bool TakeOrder(int orderID);
+        bool MarkOrderComplete();
+        int LogDriverIn(String login, String password);
+        List<Tuple<int, string, string, string, string>> GetAvailableOrders();
+        int GetDriverRating();
+        int UpdateDriverRating(int amount);
     }
 }
