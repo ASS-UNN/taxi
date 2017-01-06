@@ -20,10 +20,9 @@ namespace TaxiDesktopClient
         int Phase = 0;
         string Search;
         //int Port = 10083;
-        //string IP = "127.0.0.1";
+        string IP = "127.0.0.1";
         int Port = 4040;        
         //string IP = "95.79.210.235";
-        string IP = "95.79.252.13";
         bool TextChange = false;
         Tuple<double, double> MapCenter = new Tuple<double,double>(56.299520, 43.982913);
         Tuple<double, double> MapMoveStart;
@@ -101,15 +100,12 @@ namespace TaxiDesktopClient
             {
                 Extra.Add(s+1);
             }
-            //if (!DesktopClient.CreateOrder(NameBox.Text, PhoneBox.Text, FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text, Extra))
-            if (!DesktopClient.CreateOrder(NameBox.Text, PhoneBox.Text, FromAddressBox.Text, textBoxFromY.Text, textBoxFromX.Text, ToAddressBox.Text, textBoxToY.Text, textBoxToX.Text, Extra))
+            if (!DesktopClient.CreateOrder(NameBox.Text, PhoneBox.Text, FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text, Extra))
             {
                 MessageBox.Show("Введены некорректные данные");
             }          
             else
             {
-                Start = new Tuple<double, double>(System.Convert.ToDouble(textBoxFromX.Text, CultureInfo.InvariantCulture), System.Convert.ToDouble(textBoxFromY.Text, CultureInfo.InvariantCulture));
-                Finish = new Tuple<double, double>(System.Convert.ToDouble(textBoxToX.Text, CultureInfo.InvariantCulture), System.Convert.ToDouble(textBoxToY.Text, CultureInfo.InvariantCulture));
                 OrderButton.Visible = false;
                 labelPrice.Visible = true;
                 labelProcessing.Visible = true;
@@ -130,6 +126,11 @@ namespace TaxiDesktopClient
                 labelOperatorPhone.Text = "Связь с оператором: " + DesktopClient.GetOperatorPhone();
                 sStart = DesktopClient.GetStartPosition();
                 sFinish = DesktopClient.GetFinishPosition();
+                Start = new Tuple<double, double>(System.Convert.ToDouble(textBoxFromX.Text, CultureInfo.InvariantCulture), System.Convert.ToDouble(textBoxFromY.Text, CultureInfo.InvariantCulture));
+                Finish = new Tuple<double, double>(System.Convert.ToDouble(textBoxToX.Text, CultureInfo.InvariantCulture), System.Convert.ToDouble(textBoxToY.Text, CultureInfo.InvariantCulture));
+                string ImageUrl = GetUrl(MapCenter, Start, Finish, zPos, pictureBoxYandexMap.Width, pictureBoxYandexMap.Height);
+                pictureBoxYandexMap.Image = geoCode.DownloadMapImage(ImageUrl);
+                pictureBoxYandexMap.Refresh();
             }
         }
 
@@ -151,6 +152,13 @@ namespace TaxiDesktopClient
             }
             if (Phase==2)
             {
+                if (DesktopClient.IsCompleted())
+                {
+                    timer1.Stop();
+                    MessageBox.Show("Заказ завершен");
+                    Close();
+                    return;
+                }
                 sDriver=DesktopClient.GetDriverPosition();
                 string ImageUrl = GetUrl(MapCenter, sStart, sFinish, sDriver, zPos, pictureBoxYandexMap.Width, pictureBoxYandexMap.Height);
                 pictureBoxYandexMap.Image = geoCode.DownloadMapImage(ImageUrl);
@@ -365,7 +373,6 @@ namespace TaxiDesktopClient
             double dy = M.Y - pictureBoxYandexMap.Height / 2;
             if (MapMode == 0)
             {
-                //Start = new Tuple<double, double>(MapCenter.Item1 + dx * kx / pictureBoxYandexMap.Width, MapCenter.Item2 - dy * ky / pictureBoxYandexMap.Height);
                 Start = new Tuple<double, double>(MapCenter.Item1 - dy * ky / pictureBoxYandexMap.Height, MapCenter.Item2 + dx * kx / pictureBoxYandexMap.Width);
                 MapMode = -1;
                 string Search = geoCode.SearchObject(Start.Item2, Start.Item1);
@@ -379,7 +386,6 @@ namespace TaxiDesktopClient
             }
             if (MapMode == 1)
             {
-                //Finish = new Tuple<double, double>(MapCenter.Item1 + dx * kx / pictureBoxYandexMap.Width, MapCenter.Item2 - dy * ky / pictureBoxYandexMap.Height);
                 Finish = new Tuple<double, double>(MapCenter.Item1 - dy * ky / pictureBoxYandexMap.Height, MapCenter.Item2 + dx * kx / pictureBoxYandexMap.Width);
                 MapMode = -1;
                 string Search = geoCode.SearchObject(Finish.Item2, Finish.Item1);
@@ -429,24 +435,6 @@ namespace TaxiDesktopClient
                 textBoxToX.Text = "";
                 textBoxToY.Text = "";
             }
-        }
-
-        private void ClosingDesktop(object sender, FormClosingEventArgs e)
-        {
-            if (Phase == 1)
-            {
-                DialogResult Confirmation = MessageBox.Show("Отменить заказ?", "Выход", MessageBoxButtons.YesNoCancel);
-                if (Confirmation == System.Windows.Forms.DialogResult.Yes)
-                {
-                    DesktopClient.AbortOrder();
-                }
-                else if (Confirmation == System.Windows.Forms.DialogResult.Cancel)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-            }
-            DesktopClient.Close();
         }
     }
 }

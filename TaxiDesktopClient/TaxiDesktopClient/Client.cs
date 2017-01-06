@@ -12,7 +12,7 @@ namespace TaxiDesktopClient
     class Client
     {
         private Order clientOrder { get; set; }
-        public IScsServiceClient<ITaxiService> clientService { get; private set; }
+        private IScsServiceClient<ITaxiService> clientService { get; set; }
 
         public Client()
         {
@@ -35,14 +35,6 @@ namespace TaxiDesktopClient
             return true;
         }
 
-        public void Close()
-        {
-            if (clientService!=null)
-            {
-                clientService.Dispose();
-            }
-        }
-
         public bool CreateOrder(string customerName = "", string customerPhone = "", string orderStartAddress = "", string orderStartGeographicalLatitude = "", string orderStartGeographicalLongitude = "",string orderFinishAddress = "", string orderFinishGeographicalLatitude = "", string orderFinishGeographicalLongitude = "", List<int> orderExtraProperty = null)
         {
             int ID = clientService.ServiceProxy.CreateOrder(customerName, customerPhone, orderStartGeographicalLatitude, orderStartGeographicalLongitude, orderFinishGeographicalLatitude, orderFinishGeographicalLongitude, orderExtraProperty);
@@ -61,6 +53,15 @@ namespace TaxiDesktopClient
         public bool IsTaken()
         {
             if (clientService.ServiceProxy.GetOrderStatus() == 2)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsCompleted()
+        {
+            if (clientService.ServiceProxy.GetOrderStatus() == 3)
             {
                 return true;
             }
@@ -111,8 +112,7 @@ namespace TaxiDesktopClient
             YandexAPI.Maps.GeoCode geoCode = new GeoCode();
             if (clientOrder.orderStartGeographicalLatitude != "" && clientOrder.orderStartGeographicalLongitude != "")
             {
-                return (clientOrder.orderStartGeographicalLatitude + "," + clientOrder.orderStartGeographicalLongitude);
-                //return (clientOrder.orderStartGeographicalLongitude + "," + clientOrder.orderStartGeographicalLatitude);
+                return (clientOrder.orderStartGeographicalLongitude + "," + clientOrder.orderStartGeographicalLatitude);
             }
             if (clientOrder.orderStartAddress != "")
             {
@@ -126,8 +126,7 @@ namespace TaxiDesktopClient
             YandexAPI.Maps.GeoCode geoCode = new GeoCode();
             if (clientOrder.orderFinishGeographicalLatitude != "" && clientOrder.orderFinishGeographicalLongitude != "")
             {
-                return (clientOrder.orderFinishGeographicalLatitude + "," + clientOrder.orderFinishGeographicalLongitude);
-                //return (clientOrder.orderFinishGeographicalLongitude + "," + clientOrder.orderFinishGeographicalLatitude);
+                return (clientOrder.orderFinishGeographicalLongitude + "," + clientOrder.orderFinishGeographicalLatitude);
             }
             if (clientOrder.orderFinishAddress != "")
             {

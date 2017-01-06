@@ -413,7 +413,6 @@
             this.Controls.Add(this.NameBox);
             this.Name = "DesktopForm";
             this.Text = "DesktopClient";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingDesktop);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.FocusForm);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoveKey);
