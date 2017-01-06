@@ -137,5 +137,11 @@ namespace TestingSample
                 return -1;
             return orderManager.UpdateDriverRating(amount);
         }
+        public int RegisterNewDriver(string name, string phone, string login, string password)
+        {
+            if (driverManager == null)
+                driverManager = new DriverManagerCtrl();
+            return driverManager.RegisterNewDriver(login, password, name, phone);
+        }
     }
 }

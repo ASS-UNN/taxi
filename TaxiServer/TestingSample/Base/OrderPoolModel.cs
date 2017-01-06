@@ -95,6 +95,16 @@ namespace TestingSample.Model
             return db.ExecuteInsert(query);
         }
 
+
+        internal int CreateDriver(DriverInstanceModel driver)
+        {
+            query = "INSERT INTO drivers (name, login, password, coord1, coord2, status, phone, rating) VALUES " +
+                "('{name}', '{login}', '{password}', '{coord1}', '{coord2}', '{status}', '{phone}', {rating});";
+            var context = driver.Context();
+            query = FillContext(query, context);
+            return db.ExecuteInsert(query);
+        }
+
         public DriverInstanceModel GetDriverByLogin(string username, string pwd)
         {
             query = "SELECT * FROM drivers WHERE login = '{login}' AND password = '{password}';";
@@ -228,6 +238,33 @@ namespace TestingSample.Model
             query = FillContext(query, new Dictionary<string, string>() { { CONST.RATING, rating.ToString() }, { CONST.DRIVER_ID, driverID.ToString() } });
             db.ExecuteUpdate(query);
             return rating;
+        }
+
+
+        internal DriverInstanceModel GetDriverByLogin(string login)
+        {
+            query = "SELECT * FROM drivers WHERE login = '{login}';";
+            query = FillContext(query, new Dictionary<string, string>() { { CONST.LOGIN, login } });
+            SQLiteDataReader reader = null;
+            try
+            {
+                reader = db.ExecuteSelect(query);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            DriverInstanceModel driver = new DriverInstanceModel(
+                MaybeInt(reader[CONST.DRIVER_ID]),
+                MaybeString(reader[CONST.DRIVER_NAME]),
+                login,
+                MaybeString(reader[CONST.PASSWORD]),
+                MaybeString(reader[CONST.PHONE]),
+                MaybeString(reader[CONST.COORD1]),
+                MaybeString(reader[CONST.COORD2]),
+                MaybeInt(reader[CONST.STATUS]),
+                MaybeInt(reader[CONST.RATING]));
+            return driver;
         }
     }
 }

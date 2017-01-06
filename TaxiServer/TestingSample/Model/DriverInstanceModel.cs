@@ -50,5 +50,10 @@ namespace TestingSample.Model
         {
             return OrderPoolModel.GetInstance().GetDriverByLogin(username, pwd);
         }
+
+        public void ForceSetDriverID(int id)
+        {
+            driverID = id;
+        }
     }
 }

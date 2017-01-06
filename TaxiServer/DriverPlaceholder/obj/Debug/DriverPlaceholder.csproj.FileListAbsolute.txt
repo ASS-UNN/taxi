@@ -1,0 +1,7 @@
+W:\STUDY\repository\taxi\TaxiServer\DriverPlaceholder\bin\Debug\DriverPlaceholder.exe.config
+W:\STUDY\repository\taxi\TaxiServer\DriverPlaceholder\bin\Debug\DriverPlaceholder.exe
+W:\STUDY\repository\taxi\TaxiServer\DriverPlaceholder\bin\Debug\DriverPlaceholder.pdb
+W:\STUDY\repository\taxi\TaxiServer\DriverPlaceholder\bin\Debug\Scs.dll
+W:\STUDY\repository\taxi\TaxiServer\DriverPlaceholder\obj\Debug\DriverPlaceholder.csprojResolveAssemblyReference.cache
+W:\STUDY\repository\taxi\TaxiServer\DriverPlaceholder\obj\Debug\DriverPlaceholder.exe
+W:\STUDY\repository\taxi\TaxiServer\DriverPlaceholder\obj\Debug\DriverPlaceholder.pdb

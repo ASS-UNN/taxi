@@ -47,7 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestingSample.Test.RunTests</StartupObject>
+    <StartupObject>TestingSample.ServerInit</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Scs">

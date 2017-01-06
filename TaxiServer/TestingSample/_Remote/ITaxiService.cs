@@ -23,5 +23,6 @@ namespace TestingSample
         List<Tuple<int, string, string, string, string>> GetAvailableOrders();
         int GetDriverRating();
         int UpdateDriverRating(int amount);
+        int RegisterNewDriver(string name, string phone, string login, string password);
     }
 }
