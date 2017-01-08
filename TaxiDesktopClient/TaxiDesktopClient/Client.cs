@@ -112,7 +112,7 @@ namespace TaxiDesktopClient
             YandexAPI.Maps.GeoCode geoCode = new GeoCode();
             if (clientOrder.orderStartGeographicalLatitude != "" && clientOrder.orderStartGeographicalLongitude != "")
             {
-                return (clientOrder.orderStartGeographicalLongitude + "," + clientOrder.orderStartGeographicalLatitude);
+                return (clientOrder.orderStartGeographicalLatitude + "," + clientOrder.orderStartGeographicalLongitude);
             }
             if (clientOrder.orderStartAddress != "")
             {
@@ -126,7 +126,7 @@ namespace TaxiDesktopClient
             YandexAPI.Maps.GeoCode geoCode = new GeoCode();
             if (clientOrder.orderFinishGeographicalLatitude != "" && clientOrder.orderFinishGeographicalLongitude != "")
             {
-                return (clientOrder.orderFinishGeographicalLongitude + "," + clientOrder.orderFinishGeographicalLatitude);
+                return (clientOrder.orderFinishGeographicalLatitude + "," + clientOrder.orderFinishGeographicalLongitude);
             }
             if (clientOrder.orderFinishAddress != "")
             {
