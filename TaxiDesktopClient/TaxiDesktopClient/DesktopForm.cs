@@ -20,7 +20,8 @@ namespace TaxiDesktopClient
         int Phase = 0;
         string Search;
         //int Port = 10083;
-        string IP = "127.0.0.1";
+        //string IP = "127.0.0.1";
+        string IP = "5.164.251.145";
         int Port = 4040;        
         //string IP = "95.79.210.235";
         bool TextChange = false;
@@ -100,7 +101,7 @@ namespace TaxiDesktopClient
             {
                 Extra.Add(s+1);
             }
-            if (!DesktopClient.CreateOrder(NameBox.Text, PhoneBox.Text, FromAddressBox.Text, textBoxFromX.Text, textBoxFromY.Text, ToAddressBox.Text, textBoxToX.Text, textBoxToY.Text, Extra))
+            if (!DesktopClient.CreateOrder(NameBox.Text, PhoneBox.Text, FromAddressBox.Text, textBoxFromY.Text, textBoxFromX.Text, ToAddressBox.Text, textBoxToY.Text, textBoxToX.Text, Extra))
             {
                 MessageBox.Show("Введены некорректные данные");
             }          
