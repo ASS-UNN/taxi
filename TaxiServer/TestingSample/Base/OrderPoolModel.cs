@@ -102,7 +102,7 @@ namespace TestingSample.Model
                 "('{name}', '{login}', '{password}', '{coord1}', '{coord2}', '{status}', '{phone}', {rating});";
             var context = driver.Context();
             query = FillContext(query, context);
-            return db.ExecuteInsert(query);
+            return db.ExecuteInsert(query, "drivers");
         }
 
         public DriverInstanceModel GetDriverByLogin(string username, string pwd)

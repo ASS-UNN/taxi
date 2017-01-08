@@ -37,11 +37,11 @@ namespace TestingSample.Base
             command.ExecuteNonQuery();
         }
 
-        public int ExecuteInsert(String query)
+        public int ExecuteInsert(String query, String lastIDfrom = "orders")
         {
             SQLiteCommand command = new SQLiteCommand(query, connection);
             command.ExecuteNonQuery();
-            query = "select seq from sqlite_sequence where name='orders'";
+            query = "select seq from sqlite_sequence where name='" + lastIDfrom + "'";
             SQLiteDataReader reader = ExecuteSelect(query);
             int key = Convert.ToInt32(reader["seq"]);
             return key;
