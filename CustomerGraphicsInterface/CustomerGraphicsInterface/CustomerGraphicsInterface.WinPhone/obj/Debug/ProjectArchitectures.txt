@@ -1,0 +1,2 @@
+C:\Users\Denis\Desktop\CustomerGraphicsInterface\CustomerGraphicsInterface\CustomerGraphicsInterface.WinPhone\CustomerGraphicsInterface.WinPhone.csproj;neutral
+C:\Users\Denis\Desktop\CustomerGraphicsInterface\CustomerGraphicsInterface\CustomerGraphicsInterface\CustomerGraphicsInterface.csproj;neutral

@@ -1,0 +1,12 @@
+<XamlCompilerSaveState>
+  <ReferenceAssemblyList>
+    <ReferenceAssembly PathName="c:\users\denis\desktop\customergraphicsinterface\customergraphicsinterface\customergraphicsinterface\bin\debug\customergraphicsinterface.dll" HashGuid="59209af3-95f9-cb0f-e8ff-26711ba67fac" />
+    <ReferenceAssembly PathName="c:\users\denis\desktop\customergraphicsinterface\packages\xam.plugins.messaging.3.2.1\lib\win8\plugin.messaging.abstractions.dll" HashGuid="8c1b195a-a323-e5e6-4895-bb4623bc21a2" />
+    <ReferenceAssembly PathName="c:\users\denis\desktop\customergraphicsinterface\packages\xam.plugins.messaging.3.2.1\lib\win8\plugin.messaging.dll" HashGuid="e3e22a11-1942-3ac8-4f01-d1411186bc08" />
+    <ReferenceAssembly PathName="c:\users\denis\desktop\customergraphicsinterface\packages\xamarin.forms.2.0.0.6482\lib\win81\xamarin.forms.core.dll" HashGuid="c8a30eb8-5ae8-352d-b94f-7c913a7557ba" />
+    <ReferenceAssembly PathName="c:\users\denis\desktop\customergraphicsinterface\packages\xamarin.forms.2.0.0.6482\lib\win81\xamarin.forms.platform.dll" HashGuid="d9389e38-8a39-bed5-406b-7a34fe4704ea" />
+    <ReferenceAssembly PathName="c:\users\denis\desktop\customergraphicsinterface\packages\xamarin.forms.2.0.0.6482\lib\win81\xamarin.forms.platform.winrt.dll" HashGuid="dbd728c2-e21b-4125-2be0-f7931b605baa" />
+    <ReferenceAssembly PathName="c:\users\denis\desktop\customergraphicsinterface\packages\xamarin.forms.2.0.0.6482\lib\win81\xamarin.forms.platform.winrt.tablet.dll" HashGuid="cc26105e-9714-a8a4-7460-d1885be1ee00" />
+    <ReferenceAssembly PathName="c:\users\denis\desktop\customergraphicsinterface\packages\xamarin.forms.2.0.0.6482\lib\win81\xamarin.forms.xaml.dll" HashGuid="2828b56a-3245-7d15-6650-dfb4f30cfa91" />
+  </ReferenceAssemblyList>
+</XamlCompilerSaveState>
